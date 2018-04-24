@@ -84,7 +84,7 @@ export default class ResettableFile {
   }
 
   /**
-   * Returns logger
+   * Returns logger object which provides `error`, `warn`, `info`, `debug`, `verbose`, `silly` methods.
    * @readonly
    * @type {Logger}
    */

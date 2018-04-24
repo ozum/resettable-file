@@ -444,7 +444,7 @@ Path may be given as chained. (i.e &quot;scripts.compile&quot;)</p>
 
 ### resettableFile.logger : <code>Logger</code>
 
-<p>Returns logger</p>
+<p>Returns logger object which provides <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code>, <code>verbose</code>, <code>silly</code> methods.</p>
 
 **Kind**: instance property of [<code>ResettableFile</code>](#ResettableFile)  
 **Read only**: true  
