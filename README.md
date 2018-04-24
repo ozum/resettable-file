@@ -73,14 +73,27 @@ Written using TypeScript
 
 ```js
 const ResettableFile = require("resettable-file");
-const resettableFile = new ResettableFile("./registry.json", { logLevel: "info" }); // Set "warn" (default) or "error" for less noise
 
-const packageData = resettableFile.getDataObjectSync("./package.1.json"); // Track changes by key/value level
-packageData.set("scripts.myscript", "some-cmd").set("scripts.ls", "ls -al"); // Modify package.json
-resettableFile.writeFileSync("some.txt", "Some text data here"); // Write data to file
-resettableFile.createSymLinkSync("/some/where/tsconfig.json", "tsconfig.json"); // Create a symbolic link
-resettableFile.createDirSync("some/deep/path"); // Creates directory tree
-resettableFile.saveSync(); // Save changes to registry
+// Set "warn" (default) or "error" for less noise
+const resettableFile = new ResettableFile("./registry.json", { logLevel: "info" });
+
+// Track changes by key/value level
+const packageData = resettableFile.getDataObjectSync("./package.1.json");
+
+// Modify package.json
+packageData.set("scripts.myscript", "some-cmd").set("scripts.ls", "ls -al");
+
+// Write data to file
+resettableFile.writeFileSync("some.txt", "Some text data here");
+
+// Create a symbolic link
+resettableFile.createSymLinkSync("/some/where/tsconfig.json", "tsconfig.json");
+
+// Create directory tree
+resettableFile.createDirSync("some/deep/path");
+
+// Save changes to registry
+resettableFile.saveSync();
 ```
 
 ```js
