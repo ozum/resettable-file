@@ -1,0 +1,70 @@
+<!-- DO NOT EDIT README.md (It will be overridden by README.hbs) -->
+
+# resettable-file
+
+Resettable files for creating and maintaining boilerplates and configurations
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+<!-- START doctoc -->
+<!-- END doctoc -->
+
+# Description
+
+Provides utility class and methods for boilerplate projects to create/copy/remove files, directories and data files (json/yaml).
+Created files, directories and data files are tracked and recorded to a json file, and modifications done by this library can be undone
+by `reset()` method.
+
+Please note that, this module does not try to be a version conrol system. Main purpose of this module is to modify and reverse selected files only.
+
+# Synopsis
+
+Written using TypeScript
+
+```js
+const ResettableFile = require("resettable-file");
+const resettableFile = new ResettableFile("./registry.json", { logLevel: "info" }); // Set "warn" (default) or "error" for less noise
+
+const packageData = resettableFile.getDataObjectSync("./package.1.json");       // Track changes by key/value level
+packageData.set("scripts.myscript", "some-cmd").set("scripts.ls", "ls -al");    // Modify package.json
+resettableFile.writeFileSync("some.txt", "Some text data here");                // Write data to file
+resettableFile.createSymLinkSync("/some/where/tsconfig.json", "tsconfig.json"); // Create a symbolic link
+resettableFile.createDirSync("some/deep/path");                                 // Creates directory tree
+resettableFile.saveSync();                                                      // Save changes to registry
+```
+
+```js
+// Delete created keys in package.json, delete file and symbolic link if not changed
+// and delete directory tree if they are empty:
+resettableFile.resetSync();
+```
+
+# Reset
+
+**Can**
+
+* Delete created files by this library if they are not changed outside.
+* Delete created symbolic links if they are not changed outside.
+* Delete created directories,
+  * if they are empty
+  * or all files in directories are created by this libray and they are not changed outside.
+* Reset key/value pairs in data files (modifictions made by this library)
+  * Delete created keys,
+  * Create old keys and values for deleted keys,
+  * Write old values to replaced keys,
+  * Delete created values from arrays
+  * Insert deleted values in to arrays (closest index possible)
+
+**Can't**
+
+* Create deleted files.
+* Create deleted directories.
+* Replace old content of files (except data files)
+* Recreate deleted directories
+* Recreate deleted symbolic links
+
+As seen from what can and can't be done, `ResettableFile` is a utility to create and modify text based files and data files (json and yaml) and
+not a backup/version control for deleted files.
+
+# API
+{{>main~}}
