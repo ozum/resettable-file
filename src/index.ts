@@ -1,4 +1,6 @@
 import ResettableFile from "./resettable-file";
-export * from "./@types/index";
+import DataObject from "./data-object";
 
 export default ResettableFile;
+export * from "./@types/index";
+export { DataObject };
