@@ -17,6 +17,17 @@ import { Format, FileDetail, Path, Logger, Data, FileOptions, Registry } from ".
 
 const DEFAULT_REGISTRY: Registry = { createdDataFiles: [], files: {}, directories: [] };
 
+/**
+ * Internal object to store private data.
+ * @typedef {Object} Project~Internal
+ * @private
+ * @property {string}         registryFile      - Path of registry file.
+ * @property {string}         sourceRoot        - Root directory path of module which requires this library.
+ * @property {Object}         registry          - Module registry data which is stored in a file in project root.
+ * @property {Object}         dataFiles         - Tracked data files. Keys are file paths relative to project root.
+ * @property {boolean}        track             - Whether to track file to determine if they are auto created by module.
+ * @property {Logger}         logger            - logger object.
+ */
 type Internal = {
   registryFile: string;
   sourceRoot: string;
