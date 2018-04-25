@@ -137,7 +137,9 @@ not a backup/version control for deleted files.
 <dt><a href="#DataObject">DataObject</a></dt>
 <dd><p>This class is used for modifications of the given object.</p></dd>
 <dt><a href="#ResettableFile">ResettableFile</a></dt>
-<dd></dd>
+<dd><p>Provides utility class and methods for boilerplate projects to create/copy/remove files, directories and data files (json/yaml).
+Created files, directories and data files are tracked and recorded to a json file, and modifications done by this library can be undone
+by <code>reset()</code> method.</p></dd>
 </dl>
 
 ## Typedefs
@@ -366,6 +368,10 @@ Path may be given as chained. (i.e &quot;scripts.compile&quot;)</p>
 
 ## ResettableFile
 
+<p>Provides utility class and methods for boilerplate projects to create/copy/remove files, directories and data files (json/yaml).
+Created files, directories and data files are tracked and recorded to a json file, and modifications done by this library can be undone
+by <code>reset()</code> method.</p>
+
 **Kind**: global class
 
 * [ResettableFile](#ResettableFile)
@@ -396,16 +402,6 @@ Path may be given as chained. (i.e &quot;scripts.compile&quot;)</p>
 <a name="new_ResettableFile_new"></a>
 
 ### new ResettableFile(registryFile, [options])
-
-**Returns**: <code>Project</code> - <ul>
-
-<li>Instance</li>
-</ul>  
-**Throws**:
-
-* <code>VError</code> <ul>
-  <li>Throws error if registry file exists, but cannot be read.</li>
-  </ul>
 
 | Param                | Type                 | Default                                     | Description                                                                                                                                                         |
 | -------------------- | -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

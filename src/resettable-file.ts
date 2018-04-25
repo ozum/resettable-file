@@ -28,6 +28,12 @@ type Internal = {
 
 const internalData: InternalDataInterface<ResettableFile, Internal> = new WeakMap();
 
+/**
+ * @classdesc
+ * Provides utility class and methods for boilerplate projects to create/copy/remove files, directories and data files (json/yaml).
+ * Created files, directories and data files are tracked and recorded to a json file, and modifications done by this library can be undone
+ * by `reset()` method.
+ */
 export default class ResettableFile {
   /**
    * @param   {string}  registryFile                  - Path of the registry file. Registry file's directory is also root directory.
