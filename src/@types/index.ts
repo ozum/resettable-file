@@ -1,7 +1,11 @@
+const winston = require("winston");
 import fs from "fs-extra";
 import { Operation } from "resettable";
 
-export interface Logger {
+export const logger = new winston.createLogger();
+export type Logger = typeof logger;
+
+export interface BasicLogger {
   none?: (message: string) => void;
   error: (message: string) => void;
   warn: (message: string) => void;

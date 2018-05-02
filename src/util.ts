@@ -12,7 +12,7 @@ import crypto from "crypto";
 import sortKeys from "sort-keys";
 import { VError } from "verror";
 
-import { Format, Data, Path, Logger, Registry } from "./@types";
+import { Format, Data, Path, BasicLogger, Registry } from "./@types";
 
 export const extensionFormat: { [key: string]: Format } = {
   ".json": "json",

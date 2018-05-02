@@ -11,9 +11,9 @@ import { clone, Operation } from "resettable";
 import { InternalDataInterface } from "internal-data";
 
 import DataObject from "./data-object";
-import defaultLogger, { setLogLevel, getLogLevel } from "./logger";
+import { getLogger, setLogLevel, getLogLevel } from "./logger";
 import { log, isEmptyRegistry, extensionFormat, serializeData, parseData, getFileFormat, hashObject } from "./util";
-import { Format, FileDetail, Path, Logger, Data, FileOptions, Registry } from "./@types";
+import { Format, FileDetail, Path, BasicLogger, Data, FileOptions, Registry } from "./@types";
 
 const DEFAULT_REGISTRY: Registry = { createdDataFiles: [], files: {}, directories: [] };
 
@@ -34,7 +34,7 @@ type Internal = {
   track: boolean;
   dataFiles: { [key: string]: DataObject };
   registry: Registry;
-  logger: Logger;
+  logger: BasicLogger;
 };
 
 const internalData: InternalDataInterface<ResettableFile, Internal> = new WeakMap();
@@ -52,12 +52,14 @@ export default class ResettableFile {
    * @param   {string}  [options.sourceRoot]          - Source root. If provided all source files are calculated relative to this path for copy, symbolic link etc.
    * @param   {boolean} [options.track]               - Sets default tracking option for methods.
    * @param   {string}  [options.logLevel="warn"]     - Sets log level if default logger is used. ("error", "warn", "info", "debug", "verbose", "silly")
-   * @param   {Logger}  [options.logger]              - A looger instance such as winston. Must implement `silky`, `verbose`, `info`, `warn`, `error`.
+   * @param   {BasicLogger}  [options.logger]              - A looger instance such as winston. Must implement `silky`, `verbose`, `info`, `warn`, `error`.
    * @returns {Project}                               - Instance
    * @throws  {VError}                                - Throws error if registry file exists, but cannot be read.
    */
-  constructor(registryFile: string, { sourceRoot = "", track = true, logLevel = "warn" as keyof Logger, logger = defaultLogger } = {}) {
-    setLogLevel(logLevel);
+  constructor(
+    registryFile: string,
+    { sourceRoot = "", track = true, logLevel = "warn" as keyof BasicLogger, logger = getLogger(logLevel) } = {},
+  ) {
     try {
       internalData.set(this, {
         registryFile,
@@ -103,7 +105,7 @@ export default class ResettableFile {
   /**
    * Returns logger object which provides `error`, `warn`, `info`, `debug`, `verbose`, `silly` methods.
    * @readonly
-   * @type {Logger}
+   * @type {BasicLogger}
    */
   get logger() {
     return internalData.get(this).logger;
@@ -113,12 +115,12 @@ export default class ResettableFile {
    * Log level if default logger is used. ("none", "error", "warn", "info", "debug", "verbose", "silly")
    * @type {string} logLevel - Log level: ("none", "error", "warn", "info", "debug", "verbose", "silly")
    */
-  set logLevel(logLevel: keyof Logger) {
-    setLogLevel(logLevel);
+  set logLevel(logLevel: keyof BasicLogger) {
+    setLogLevel(this.logger, logLevel);
   }
 
-  get logLevel(): keyof Logger {
-    return getLogLevel();
+  get logLevel(): keyof BasicLogger {
+    return getLogLevel(this.logger);
   }
 
   /**

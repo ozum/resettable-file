@@ -4,12 +4,12 @@ import fs from "fs-extra";
 import { promisify } from "util";
 
 import ResettableFile from "./resettable-file";
-import defaultLogger, { stubLogger } from "./logger";
-import { Logger } from "./@types";
+import { stubLogger } from "./logger";
+import { BasicLogger } from "./@types";
 
 const [exec] = [promisify(childProcess.exec)];
 
-const LOGLEVEL: keyof Logger = "error";
+const LOGLEVEL: keyof BasicLogger = "error";
 const paths = {
   projectMaster: path.join(__dirname, "./__test_supplements__/project-master"),
   project: path.join(__dirname, "./__test_supplements__/project"),
