@@ -35,6 +35,7 @@ Resettable files for creating and maintaining boilerplates and configurations
     * [resettableFile.sourceRoot : <code>string</code>](#resettablefilesourceroot--codestringcode)
     * [resettableFile.track : <code>boolean</code>](#resettablefiletrack--codebooleancode)
     * [resettableFile.logger : <code>Logger</code>](#resettablefilelogger--codeloggercode)
+    * [resettableFile.logLevel : <code>string</code>](#resettablefileloglevel--codestringcode)
     * [resettableFile.fromRoot(...part) ⇒ <code>string</code>](#resettablefilefromrootpart-%E2%87%92-codestringcode)
     * [resettableFile.fromSourceRoot(...part) ⇒ <code>string</code>](#resettablefilefromsourcerootpart-%E2%87%92-codestringcode)
     * [resettableFile.isDataFile(projectFile) ⇒ <code>boolean</code>](#resettablefileisdatafileprojectfile-%E2%87%92-codebooleancode)
@@ -380,6 +381,7 @@ by <code>reset()</code> method.</p>
   * [.sourceRoot](#ResettableFile+sourceRoot) : <code>string</code>
   * [.track](#ResettableFile+track) : <code>boolean</code>
   * [.logger](#ResettableFile+logger) : <code>Logger</code>
+  * [.logLevel](#ResettableFile+logLevel) : <code>string</code>
   * [.fromRoot(...part)](#ResettableFile+fromRoot) ⇒ <code>string</code>
   * [.fromSourceRoot(...part)](#ResettableFile+fromSourceRoot) ⇒ <code>string</code>
   * [.isDataFile(projectFile)](#ResettableFile+isDataFile) ⇒ <code>boolean</code>
@@ -444,6 +446,13 @@ by <code>reset()</code> method.</p>
 
 **Kind**: instance property of [<code>ResettableFile</code>](#ResettableFile)  
 **Read only**: true  
+<a name="ResettableFile+logLevel"></a>
+
+### resettableFile.logLevel : <code>string</code>
+
+<p>Log level if default logger is used. (&quot;none&quot;, &quot;error&quot;, &quot;warn&quot;, &quot;info&quot;, &quot;debug&quot;, &quot;verbose&quot;, &quot;silly&quot;)</p>
+
+**Kind**: instance property of [<code>ResettableFile</code>](#ResettableFile)  
 <a name="ResettableFile+fromRoot"></a>
 
 ### resettableFile.fromRoot(...part) ⇒ <code>string</code>

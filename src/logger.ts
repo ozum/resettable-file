@@ -12,13 +12,22 @@ const logger = new winston.createLogger({
 });
 
 /**
- * Creates a new logger with requested log level.
+ * Sets default logger's level to given level.
  * @param   {string} level - Log level.
  * @returns {void}
  * @private
  */
 export function setLogLevel(level: keyof Logger): void {
   logger.transports[0].level = level;
+}
+
+/**
+ * Returns default logger's level.
+ * @returns {string} - Log level.
+ * @private
+ */
+export function getLogLevel(): keyof Logger {
+  return logger.transports[0].level;
 }
 
 export default logger;

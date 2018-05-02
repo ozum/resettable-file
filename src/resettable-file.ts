@@ -11,7 +11,7 @@ import { clone, Operation } from "resettable";
 import { InternalDataInterface } from "internal-data";
 
 import DataObject from "./data-object";
-import defaultLogger, { setLogLevel } from "./logger";
+import defaultLogger, { setLogLevel, getLogLevel } from "./logger";
 import { log, isEmptyRegistry, extensionFormat, serializeData, parseData, getFileFormat, hashObject } from "./util";
 import { Format, FileDetail, Path, Logger, Data, FileOptions, Registry } from "./@types";
 
@@ -107,6 +107,18 @@ export default class ResettableFile {
    */
   get logger() {
     return internalData.get(this).logger;
+  }
+
+  /**
+   * Log level if default logger is used. ("none", "error", "warn", "info", "debug", "verbose", "silly")
+   * @type {string} logLevel - Log level: ("none", "error", "warn", "info", "debug", "verbose", "silly")
+   */
+  set logLevel(logLevel: keyof Logger) {
+    setLogLevel(logLevel);
+  }
+
+  get logLevel(): keyof Logger {
+    return getLogLevel();
   }
 
   /**

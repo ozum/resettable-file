@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import { Operation } from "resettable";
 
 export interface Logger {
+  none?: (message: string) => void;
   error: (message: string) => void;
   warn: (message: string) => void;
   info: (message: string) => void;

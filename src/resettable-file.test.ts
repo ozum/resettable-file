@@ -90,6 +90,13 @@ describe("ResettableFile", () => {
     expect(resettableFile.track).toBe(true);
   });
 
+  it("should have readable/writeable logLevel attribute", () => {
+    const oldLevel = resettableFile.logLevel;
+    resettableFile.logLevel = "none";
+    expect(resettableFile.logLevel).toBe("none");
+    resettableFile.logLevel = oldLevel;
+  });
+
   it("should calculate fromRoot()", () => {
     expect(resettableFile.fromRoot("some/file.js")).toBe(path.join(paths.project, "some/file.js"));
   });
