@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.1"></a>
+
+## [0.2.1](https://github.com/ozum/resettable-file/compare/v0.2.0...v0.2.1) (2018-05-02)
+
+### Bug Fixes
+
+* make ResettableFile.logger non-singleton ([9435c20](https://github.com/ozum/resettable-file/commit/9435c20))
+
 <a name="0.2.0"></a>
 
 # [0.2.0](https://github.com/ozum/resettable-file/compare/v0.1.6...v0.2.0) (2018-05-02)
