@@ -208,6 +208,7 @@ export default class ResettableFile {
    */
   saveSync() {
     const internal = internalData.get(this);
+    let writtenAny = false;
     try {
       Object.entries(internal.dataFiles)
         .filter(([projectFile, dataObject]) => dataObject.isChanged)
@@ -215,9 +216,10 @@ export default class ResettableFile {
           internal.registry.files[projectFile] = dataObject.diffFromOriginal({ compact: true });
           const { format, sortKeys } = dataObject;
           this.writeFileSync(projectFile, dataObject.data, { format, sortKeys, serialize: true, track: false, force: true }); // Track is false, because tracked data files are tracked key level and written partially.
+          writtenAny = true;
         });
       this.saveRegistrySync();
-      this.logger.info("Resettable files saved.");
+      writtenAny ? this.logger.info("Resettable files saved.") : null;
     } catch (e) {
       /* istanbul ignore next */
       throw new VError(e, "Cannot save resettable files.");
