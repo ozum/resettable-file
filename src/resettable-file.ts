@@ -47,12 +47,12 @@ const internalData: InternalDataInterface<ResettableFile, Internal> = new WeakMa
  */
 export default class ResettableFile {
   /**
-   * @param   {string}  registryFile                  - Path of the registry file. Registry file's directory is also root directory.
-   * @param   {Object}  [options]                     - Options
-   * @param   {string}  [options.sourceRoot]          - Source root. If provided all source files are calculated relative to this path for copy, symbolic link etc.
-   * @param   {boolean} [options.track]               - Sets default tracking option for methods.
-   * @param   {string}  [options.logLevel="warn"]     - Sets log level if default logger is used. ("error", "warn", "info", "debug", "verbose", "silly")
-   * @param   {BasicLogger}  [options.logger]              - A looger instance such as winston. Must implement `silky`, `verbose`, `info`, `warn`, `error`.
+   * @param   {string}      registryFile              - Path of the registry file. Registry file's directory is also root directory.
+   * @param   {Object}      [options]                 - Options
+   * @param   {string}      [options.sourceRoot]      - Source root. If provided all source files are calculated relative to this path for copy, symbolic link etc.
+   * @param   {boolean}     [options.track]           - Sets default tracking option for methods.
+   * @param   {string}      [options.logLevel="warn"] - Sets log level if default logger is used. ("error", "warn", "info", "debug", "verbose", "silly")
+   * @param   {BasicLogger} [options.logger]          - A looger instance such as winston. Must implement `info`, `warn`, `error`, `verbose`, `silly`.
    * @returns {Project}                               - Instance
    * @throws  {VError}                                - Throws error if registry file exists, but cannot be read.
    */
