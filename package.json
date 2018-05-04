@@ -45,11 +45,12 @@
     "@types/lodash.isequal": "^4.5.2",
     "@types/lodash.set": "^4.3.3",
     "@types/verror": "^1.10.3",
-    "moe-scripts": "0.0.54"
+    "moe-scripts": "0.0.61"
   },
   "dependencies": {
     "arrify": "^1.0.1",
     "empty-dir": "^1.0.0",
+    "fs-extra": "^6.0.0",
     "internal-data": "^0.3.1",
     "js-beautify": "^1.7.5",
     "js-yaml": "^3.11.0",

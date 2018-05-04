@@ -15,7 +15,6 @@ Resettable files for creating and maintaining boilerplates and configurations
 * [Reset](#reset)
 * [API](#api)
   * [Classes](#classes)
-  * [Typedefs](#typedefs)
   * [DataObject](#dataobject)
     * [new DataObject([data], [options])](#new-dataobjectdata-options)
     * [dataObject.isChanged : <code>boolean</code>](#dataobjectischanged--codebooleancode)
@@ -34,7 +33,7 @@ Resettable files for creating and maintaining boilerplates and configurations
     * [resettableFile.root : <code>string</code>](#resettablefileroot--codestringcode)
     * [resettableFile.sourceRoot : <code>string</code>](#resettablefilesourceroot--codestringcode)
     * [resettableFile.track : <code>boolean</code>](#resettablefiletrack--codebooleancode)
-    * [resettableFile.logger : <code>Logger</code>](#resettablefilelogger--codeloggercode)
+    * [resettableFile.logger : <code>BasicLogger</code>](#resettablefilelogger--codebasicloggercode)
     * [resettableFile.logLevel : <code>string</code>](#resettablefileloglevel--codestringcode)
     * [resettableFile.fromRoot(...part) ⇒ <code>string</code>](#resettablefilefromrootpart-%E2%87%92-codestringcode)
     * [resettableFile.fromSourceRoot(...part) ⇒ <code>string</code>](#resettablefilefromsourcerootpart-%E2%87%92-codestringcode)
@@ -54,9 +53,6 @@ Resettable files for creating and maintaining boilerplates and configurations
     * [resettableFile.copyFileSync(sourceFile, projectFile, [options]) ⇒ <code>void</code>](#resettablefilecopyfilesyncsourcefile-projectfile-options-%E2%87%92-codevoidcode)
     * [resettableFile.createDirSync(projectDir, [options]) ⇒ <code>void</code>](#resettablefilecreatedirsyncprojectdir-options-%E2%87%92-codevoidcode)
     * [resettableFile.deleteDirSync(projectDir, [options]) ⇒ <code>void</code>](#resettablefiledeletedirsyncprojectdir-options-%E2%87%92-codevoidcode)
-  * [Format : <code>&quot;json&quot;</code> \| <code>&quot;yaml&quot;</code>](#format--codequotjsonquotcode-%5C-codequotyamlquotcode)
-  * [FileOptions : <code>Object</code>](#fileoptions--codeobjectcode)
-  * [Registry : <code>Object</code>](#registry--codeobjectcode)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -143,17 +139,6 @@ Created files, directories and data files are tracked and recorded to a json fil
 by <code>reset()</code> method.</p></dd>
 </dl>
 
-## Typedefs
-
-<dl>
-<dt><a href="#Format">Format</a> : <code>&quot;json&quot;</code> | <code>&quot;yaml&quot;</code></dt>
-<dd><p>Data format supported by this library.</p></dd>
-<dt><a href="#FileOptions">FileOptions</a> : <code>Object</code></dt>
-<dd><p>Type for file operation methods&#39; options.</p></dd>
-<dt><a href="#Registry">Registry</a> : <code>Object</code></dt>
-<dd><p>Type for registry</p></dd>
-</dl>
-
 <a name="DataObject"></a>
 
 ## DataObject
@@ -189,7 +174,7 @@ by <code>reset()</code> method.</p></dd>
 | [options.track]      | <code>boolean</code>                 |                 | <p>Whether to track changes.</p>                                                                                                                             |
 | [options.sortKeys]   | <code>Array.&lt;string&gt;</code>    |                 | <p>List of keys which their values shoud be sorted. Key names be paths like &quot;scripts.test&quot;</p>                                                     |
 | [options.name]       | <code>string</code>                  |                 | <p>Path of the name to be used in logs.</p>                                                                                                                  |
-| [options.format]     | [<code>Format</code>](#Format)       |                 | <p>Data format used for parsing and serializing data.</p>                                                                                                    |
+| [options.format]     | <code>Format</code>                  |                 | <p>Data format used for parsing and serializing data.</p>                                                                                                    |
 | [options.operations] | <code>Array.&lt;Operation&gt;</code> |                 | <p>Operations to reset data to its original state.</p>                                                                                                       |
 | [options.logger]     | <code>Logger</code>                  |                 | <p>A looger instance such as winston. Must implement <code>silky</code>, <code>verbose</code>, <code>info</code>, <code>warn</code>, <code>error</code>.</p> |
 
@@ -380,7 +365,7 @@ by <code>reset()</code> method.</p>
   * [.root](#ResettableFile+root) : <code>string</code>
   * [.sourceRoot](#ResettableFile+sourceRoot) : <code>string</code>
   * [.track](#ResettableFile+track) : <code>boolean</code>
-  * [.logger](#ResettableFile+logger) : <code>Logger</code>
+  * [.logger](#ResettableFile+logger) : <code>BasicLogger</code>
   * [.logLevel](#ResettableFile+logLevel) : <code>string</code>
   * [.fromRoot(...part)](#ResettableFile+fromRoot) ⇒ <code>string</code>
   * [.fromSourceRoot(...part)](#ResettableFile+fromSourceRoot) ⇒ <code>string</code>
@@ -405,14 +390,14 @@ by <code>reset()</code> method.</p>
 
 ### new ResettableFile(registryFile, [options])
 
-| Param                | Type                 | Default                                     | Description                                                                                                                                                         |
-| -------------------- | -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| registryFile         | <code>string</code>  |                                             | <p>Path of the registry file. Registry file's directory is also root directory.</p>                                                                                 |
-| [options]            | <code>Object</code>  |                                             | <p>Options</p>                                                                                                                                                      |
-| [options.sourceRoot] | <code>string</code>  |                                             | <p>Source root. If provided all source files are calculated relative to this path for copy, symbolic link etc.</p>                                                  |
-| [options.track]      | <code>boolean</code> |                                             | <p>Sets default tracking option for methods.</p>                                                                                                                    |
-| [options.logLevel]   | <code>string</code>  | <code>&quot;\&quot;warn\&quot;&quot;</code> | <p>Sets log level if default logger is used. (&quot;error&quot;, &quot;warn&quot;, &quot;info&quot;, &quot;debug&quot;, &quot;verbose&quot;, &quot;silly&quot;)</p> |
-| [options.logger]     | <code>Logger</code>  |                                             | <p>A looger instance such as winston. Must implement <code>silky</code>, <code>verbose</code>, <code>info</code>, <code>warn</code>, <code>error</code>.</p>        |
+| Param                | Type                     | Default                                     | Description                                                                                                                                                         |
+| -------------------- | ------------------------ | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| registryFile         | <code>string</code>      |                                             | <p>Path of the registry file. Registry file's directory is also root directory.</p>                                                                                 |
+| [options]            | <code>Object</code>      |                                             | <p>Options</p>                                                                                                                                                      |
+| [options.sourceRoot] | <code>string</code>      |                                             | <p>Source root. If provided all source files are calculated relative to this path for copy, symbolic link etc.</p>                                                  |
+| [options.track]      | <code>boolean</code>     |                                             | <p>Sets default tracking option for methods.</p>                                                                                                                    |
+| [options.logLevel]   | <code>string</code>      | <code>&quot;\&quot;warn\&quot;&quot;</code> | <p>Sets log level if default logger is used. (&quot;error&quot;, &quot;warn&quot;, &quot;info&quot;, &quot;debug&quot;, &quot;verbose&quot;, &quot;silly&quot;)</p> |
+| [options.logger]     | <code>BasicLogger</code> |                                             | <p>A looger instance such as winston. Must implement <code>info</code>, <code>warn</code>, <code>error</code>, <code>verbose</code>, <code>silly</code>.</p>        |
 
 <a name="ResettableFile+root"></a>
 
@@ -440,7 +425,7 @@ by <code>reset()</code> method.</p>
 **Read only**: true  
 <a name="ResettableFile+logger"></a>
 
-### resettableFile.logger : <code>Logger</code>
+### resettableFile.logger : <code>BasicLogger</code>
 
 <p>Returns logger object which provides <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code>, <code>verbose</code>, <code>silly</code> methods.</p>
 
@@ -694,19 +679,19 @@ createSymLink(here("../../config.json"), "tsconfig.json");
   <li>Throws error if file cannot be found.</li>
   </ul>
 
-| Param                    | Type                           | Default                       | Description                                                                                 |
-| ------------------------ | ------------------------------ | ----------------------------- | ------------------------------------------------------------------------------------------- |
-| projectFile              | <code>string</code>            |                               | <p>File to read relative to root.</p>                                                       |
-| [options]                | <code>Object</code>            |                               | <p>Options</p>                                                                              |
-| [options.create]         | <code>boolean</code>           | <code>false</code>            | <p>Whether to create file if it does not exist.</p>                                         |
-| [options.track]          | <code>boolean</code>           | <code>[this.track]</code>     | <p>Whether to track file in registry if it is created by module.</p>                        |
-| [options.force]          | <code>boolean</code>           | <code>false</code>            | <p>Whether to force create even it is deleted by user.</p>                                  |
-| [options.defaultContent] | <code>\*</code>                |                               | <p>Default content to write if file does not exist.</p>                                     |
-| [options.throwNotExists] | <code>boolean</code>           | <code>true</code>             | <p>Throw error if file does not exist.</p>                                                  |
-| [options.parse]          | <code>boolean</code>           | <code>false</code>            | <p>Whether to parse file content to create a js object.</p>                                 |
-| [options.format]         | [<code>Format</code>](#Format) | <code>[file extension]</code> | <p>Format to use parsing data.</p>                                                          |
-| [options.createFormat]   | [<code>Format</code>](#Format) | <code>json</code>             | <p>Format to be used while creating nonexisting file if no format is provided.</p>          |
-| [options.serialize]      | [<code>Format</code>](#Format) | <code>[parse]</code>          | <p>Whether to serialize content if file is created. (Default is status of parse option)</p> |
+| Param                    | Type                 | Default                       | Description                                                                                 |
+| ------------------------ | -------------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
+| projectFile              | <code>string</code>  |                               | <p>File to read relative to root.</p>                                                       |
+| [options]                | <code>Object</code>  |                               | <p>Options</p>                                                                              |
+| [options.create]         | <code>boolean</code> | <code>false</code>            | <p>Whether to create file if it does not exist.</p>                                         |
+| [options.track]          | <code>boolean</code> | <code>[this.track]</code>     | <p>Whether to track file in registry if it is created by module.</p>                        |
+| [options.force]          | <code>boolean</code> | <code>false</code>            | <p>Whether to force create even it is deleted by user.</p>                                  |
+| [options.defaultContent] | <code>\*</code>      |                               | <p>Default content to write if file does not exist.</p>                                     |
+| [options.throwNotExists] | <code>boolean</code> | <code>true</code>             | <p>Throw error if file does not exist.</p>                                                  |
+| [options.parse]          | <code>boolean</code> | <code>false</code>            | <p>Whether to parse file content to create a js object.</p>                                 |
+| [options.format]         | <code>Format</code>  | <code>[file extension]</code> | <p>Format to use parsing data.</p>                                                          |
+| [options.createFormat]   | <code>Format</code>  | <code>json</code>             | <p>Format to be used while creating nonexisting file if no format is provided.</p>          |
+| [options.serialize]      | <code>Format</code>  | <code>[parse]</code>          | <p>Whether to serialize content if file is created. (Default is status of parse option)</p> |
 
 <a name="ResettableFile+readFileDetailedSync"></a>
 
@@ -725,19 +710,19 @@ createSymLink(here("../../config.json"), "tsconfig.json");
   <li>Throws error if file cannot be found.</li>
   </ul>
 
-| Param                    | Type                           | Default                       | Description                                                                                 |
-| ------------------------ | ------------------------------ | ----------------------------- | ------------------------------------------------------------------------------------------- |
-| projectFile              | <code>string</code>            |                               | <p>File to read relative to project root.</p>                                               |
-| [options]                | <code>Object</code>            |                               | <p>Options</p>                                                                              |
-| [options.create]         | <code>boolean</code>           | <code>false</code>            | <p>Whether to create file if it does not exist.</p>                                         |
-| [options.track]          | <code>boolean</code>           | <code>[this.track]</code>     | <p>Whether to track file in registry if it is created by module.</p>                        |
-| [options.force]          | <code>boolean</code>           | <code>false</code>            | <p>Whether to force create even it is deleted by user.</p>                                  |
-| [options.defaultContent] | <code>\*</code>                |                               | <p>Default content to write if file does not exist.</p>                                     |
-| [options.throwNotExists] | <code>boolean</code>           | <code>true</code>             | <p>Throw error if file does not exist.</p>                                                  |
-| [options.parse]          | <code>boolean</code>           | <code>false</code>            | <p>Whether to parse file content to create a js object.</p>                                 |
-| [options.format]         | [<code>Format</code>](#Format) | <code>[file extension]</code> | <p>Format to use parsing data.</p>                                                          |
-| [options.createFormat]   | [<code>Format</code>](#Format) | <code>json</code>             | <p>Format to be used while creating nonexisting file if no format is provided.</p>          |
-| [options.serialize]      | [<code>Format</code>](#Format) | <code>[parse]</code>          | <p>Whether to serialize content if file is created. (Default is status of parse option)</p> |
+| Param                    | Type                 | Default                       | Description                                                                                 |
+| ------------------------ | -------------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
+| projectFile              | <code>string</code>  |                               | <p>File to read relative to project root.</p>                                               |
+| [options]                | <code>Object</code>  |                               | <p>Options</p>                                                                              |
+| [options.create]         | <code>boolean</code> | <code>false</code>            | <p>Whether to create file if it does not exist.</p>                                         |
+| [options.track]          | <code>boolean</code> | <code>[this.track]</code>     | <p>Whether to track file in registry if it is created by module.</p>                        |
+| [options.force]          | <code>boolean</code> | <code>false</code>            | <p>Whether to force create even it is deleted by user.</p>                                  |
+| [options.defaultContent] | <code>\*</code>      |                               | <p>Default content to write if file does not exist.</p>                                     |
+| [options.throwNotExists] | <code>boolean</code> | <code>true</code>             | <p>Throw error if file does not exist.</p>                                                  |
+| [options.parse]          | <code>boolean</code> | <code>false</code>            | <p>Whether to parse file content to create a js object.</p>                                 |
+| [options.format]         | <code>Format</code>  | <code>[file extension]</code> | <p>Format to use parsing data.</p>                                                          |
+| [options.createFormat]   | <code>Format</code>  | <code>json</code>             | <p>Format to be used while creating nonexisting file if no format is provided.</p>          |
+| [options.serialize]      | <code>Format</code>  | <code>[parse]</code>          | <p>Whether to serialize content if file is created. (Default is status of parse option)</p> |
 
 <a name="ResettableFile+writeFileSync"></a>
 
@@ -752,16 +737,16 @@ createSymLink(here("../../config.json"), "tsconfig.json");
   <li>Throws error if file cannot be created</li>
   </ul>
 
-| Param               | Type                           | Default                       | Description                                                                                                             |
-| ------------------- | ------------------------------ | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| projectFile         | <code>string</code>            |                               | <p>File path to relative to project root.</p>                                                                           |
-| data                | <code>string</code>            |                               | <p>Data to write</p>                                                                                                    |
-| [options]           | <code>Object</code>            |                               | <p>Options</p>                                                                                                          |
-| [options.force]     | <code>boolean</code>           | <code>false</code>            | <p>Writes file even it exists and not auto created.</p>                                                                 |
-| [options.track]     | <code>boolean</code>           | <code>[this.track]</code>     | <p>Whether to track file in registry if it is created by module.</p>                                                    |
-| [options.serialize] | <code>boolean</code>           | <code>false</code>            | <p>Whether to serialize object before written to file.</p>                                                              |
-| [options.format]    | [<code>Format</code>](#Format) | <code>[file extension]</code> | <p>Format to use serializing data.</p>                                                                                  |
-| [options.sortKeys]  | <code>Array</code>             |                               | <p>Keys to be sorted. Keys may be given as chained paths. (i.e. <code>a.b.c</code> -&gt; Keys of c would be sorted)</p> |
+| Param               | Type                 | Default                       | Description                                                                                                             |
+| ------------------- | -------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| projectFile         | <code>string</code>  |                               | <p>File path to relative to project root.</p>                                                                           |
+| data                | <code>string</code>  |                               | <p>Data to write</p>                                                                                                    |
+| [options]           | <code>Object</code>  |                               | <p>Options</p>                                                                                                          |
+| [options.force]     | <code>boolean</code> | <code>false</code>            | <p>Writes file even it exists and not auto created.</p>                                                                 |
+| [options.track]     | <code>boolean</code> | <code>[this.track]</code>     | <p>Whether to track file in registry if it is created by module.</p>                                                    |
+| [options.serialize] | <code>boolean</code> | <code>false</code>            | <p>Whether to serialize object before written to file.</p>                                                              |
+| [options.format]    | <code>Format</code>  | <code>[file extension]</code> | <p>Format to use serializing data.</p>                                                                                  |
+| [options.sortKeys]  | <code>Array</code>   |                               | <p>Keys to be sorted. Keys may be given as chained paths. (i.e. <code>a.b.c</code> -&gt; Keys of c would be sorted)</p> |
 
 **Example**
 
@@ -870,46 +855,3 @@ project.createDir("path/to/dir"); // Created "path", "to" and "dir" as necessary
 | [options.track]    | <code>boolean</code> | <code>[this.track]</code> | <p>Whether to track file in registry if it is created by module.</p> |
 | [options.logFiles] | <code>boolean</code> | <code>true</code>         | <p>Whether to log delete operation of files.</p>                     |
 | [options.logDirs]  | <code>boolean</code> | <code>true</code>         | <p>Whether to log delete operation of sub directories.</p>           |
-
-<a name="Format"></a>
-
-## Format : <code>&quot;json&quot;</code> \| <code>&quot;yaml&quot;</code>
-
-<p>Data format supported by this library.</p>
-
-**Kind**: global typedef  
-<a name="FileOptions"></a>
-
-## FileOptions : <code>Object</code>
-
-<p>Type for file operation methods' options.</p>
-
-**Kind**: global typedef  
-**Properties**
-
-| Name             | Type                           | Description                                                                                                             |
-| ---------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| [create]         | <code>boolean</code>           | <p>Whether to create file if it does not exist.</p>                                                                     |
-| [track]          | <code>boolean</code>           | <p>Whether to track file in registry if it is created by module.</p>                                                    |
-| [force]          | <code>boolean</code>           | <p>Whether to force create even it is deleted by user.</p>                                                              |
-| [defaultContent] | <code>\*</code>                | <p>Default content to write if file does not exist.</p>                                                                 |
-| [errorNotExists] | <code>boolean</code>           | <p>Throw error if file does not exist.</p>                                                                              |
-| [parse]          | <code>boolean</code>           | <p>Whether to parse file content to create a js object.</p>                                                             |
-| [format]         | [<code>Format</code>](#Format) | <p>Format to use parsing data.</p>                                                                                      |
-| [createFormat]   | [<code>Format</code>](#Format) | <p>Format to be used while creating nonexisting file if no format is provided.</p>                                      |
-| [serialize]      | [<code>Format</code>](#Format) | <p>Whether to serialize content if file is created. (Default is status of parse option)</p>                             |
-| [sortKeys]       | <code>Array</code>             | <p>Keys to be sorted. Keys may be given as chained paths. (i.e. <code>a.b.c</code> -&gt; Keys of c would be sorted)</p> |
-
-<a name="Registry"></a>
-
-## Registry : <code>Object</code>
-
-<p>Type for registry</p>
-
-**Kind**: global typedef  
-**Properties**
-
-| Name        | Type                                                                  | Description                                                                                                                                                                           |
-| ----------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| files       | <code>Object.&lt;string, (Array.&lt;Operation&gt;\|string)&gt;</code> | <p>Object which stores files. Keys are file names relative to root, values are array of operations (for data files), hash (for regular files) or target file (for symbolic links)</p> |
-| directories | <code>Array.&lt;string&gt;</code>                                     | <p>List of directories created.</p>                                                                                                                                                   |
