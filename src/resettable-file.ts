@@ -6,6 +6,7 @@ import VError from "verror";
 import arrify from "arrify";
 import crypto from "crypto";
 import isEqual from "lodash.isEqual";
+import uniq from "lodash.uniq";
 import emptyDir from "empty-dir";
 import { clone, Operation } from "resettable";
 import { InternalDataInterface } from "internal-data";
@@ -234,10 +235,9 @@ export default class ResettableFile {
    */
   resetSync() {
     const internal = internalData.get(this);
-
     try {
       this.logger.info("Reset begins.");
-      const allFiles = Object.keys(internal.registry.files).concat(Object.keys(internal.dataFiles));
+      const allFiles = uniq(Object.keys(internal.registry.files).concat(Object.keys(internal.dataFiles)));
       allFiles.forEach(projectFile => this.resetFileSync(projectFile));
 
       // Delete created directories if they are empty.
@@ -434,6 +434,7 @@ export default class ResettableFile {
     const unapplied = dataObject.reset();
     const emptyData = isEqual(dataObject.data, {}) || !internal.registry.files[projectFile];
     const createdIndex = internal.registry.createdDataFiles.indexOf(projectFile);
+
     internal.registry.createdDataFiles.splice(createdIndex, 1);
 
     if (emptyData && createdIndex > -1) {
@@ -441,7 +442,7 @@ export default class ResettableFile {
       this.logger.info(`Deleted data file after reset (empty object created by ResettableFile): ${file}`);
     } else {
       const { format, sortKeys } = dataObject;
-      this.writeFileSync(file, dataObject.data, { format, sortKeys, serialize: true, track: false, force: true }); // Track is false, because tracked data files are tracked key level and written partially.
+      this.writeFileSync(projectFile, dataObject.data, { format, sortKeys, serialize: true, track: false, force: true }); // Track is false, because tracked data files are tracked key level and written partially.
     }
 
     /* istanbul ignore next */
@@ -610,7 +611,6 @@ export default class ResettableFile {
     try {
       if (isSafe) {
         const content = serialize ? serializeData(data as object, serializeFormat, sortKeys).data : data;
-
         fs.outputFileSync(filePath, content);
 
         if (track) {

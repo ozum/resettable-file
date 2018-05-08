@@ -2,8 +2,9 @@ import * as childProcess from "child_process";
 import path from "path";
 import fs from "fs-extra";
 import { promisify } from "util";
+import has from "lodash.has";
 
-import ResettableFile from "./resettable-file";
+import ResettableFile from "./index";
 import { stubLogger } from "./logger";
 import { BasicLogger } from "./@types";
 
@@ -60,7 +61,6 @@ beforeAll(async () => {
 afterAll(async () => {
   try {
     await Promise.all([clear(), clear(2)]);
-    // await exec(`rm -rf ${path.join(paths.project, "/")}auto-test-qx-*`);
   } catch (e) {
     console.error(e);
   }
@@ -254,6 +254,15 @@ describe("ResettableFile", () => {
       resettableFile.resetFileSync("data.json");
       expect(dataObject.has("x")).toBe(false);
     });
+
+    // it("should reset data file", () => {
+    //   const dataObject = resettableFile.getDataObjectSync("data.json");
+    //   dataObject.set("x", 1);
+    //   resettableFile.saveSync();
+    //   resettableFile.resetFileSync("data.json");
+    //   const data = fs.readJsonSync(path.join(paths.project, "data.json"));
+    //   expect(has(data, "x")).toBe(false);
+    // });
 
     it("should throw if non-tracked file tried to be reset", () => {
       expect(() => resettableFile.resetFileSync("text.txt")).toThrow("Cannot reset file");
@@ -708,7 +717,6 @@ describe("ResettableFile", () => {
       rf.saveSync();
       fs.writeFileSync(rf.fromRoot("alt-x"), "other");
       rf.resetSync();
-
       expect([rf.hasFileSync("registry.json"), rf.hasFileSync("alt-x.json"), rf.hasFileSync("alt-x")]).toEqual([true, false, true]);
     });
 

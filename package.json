@@ -44,6 +44,7 @@
     "@types/lodash.isempty": "^4.4.3",
     "@types/lodash.isequal": "^4.5.2",
     "@types/lodash.set": "^4.3.3",
+    "@types/lodash.uniq": "^4.5.3",
     "@types/verror": "^1.10.3",
     "moe-scripts": "0.0.61"
   },
@@ -59,6 +60,7 @@
     "lodash.isempty": "^4.4.0",
     "lodash.isequal": "^4.5.0",
     "lodash.set": "^4.3.2",
+    "lodash.uniq": "^4.5.0",
     "resettable": "^0.1.18",
     "sort-keys": "^2.0.0",
     "verror": "^1.10.0",
