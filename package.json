@@ -46,13 +46,13 @@
     "@types/lodash.set": "^4.3.3",
     "@types/lodash.uniq": "^4.5.3",
     "@types/verror": "^1.10.3",
+    "internal-data": "^0.3.1",
     "moe-scripts": "0.0.61"
   },
   "dependencies": {
     "arrify": "^1.0.1",
     "empty-dir": "^1.0.0",
     "fs-extra": "^6.0.0",
-    "internal-data": "^0.3.1",
     "js-beautify": "^1.7.5",
     "js-yaml": "^3.11.0",
     "lodash.get": "^4.4.2",
