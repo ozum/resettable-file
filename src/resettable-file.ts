@@ -184,13 +184,12 @@ export default class ResettableFile {
     this.logger.debug(`[saveRegistry] ${log(internal.registry)}`);
 
     try {
-      if (isEmpty && fs.existsSync(registryFile)) {
+      const exists = fs.existsSync(registryFile);
+
+      if (isEmpty && exists) {
         fs.removeSync(registryFile);
         this.logger.info(`Deleted registry file (It is empty): ${registryFile}`);
-        return;
-      }
-
-      if (!isEmpty) {
+      } else if (!isEmpty && (!exists || !isEqual(fs.readJsonSync(registryFile), internal.registry))) {
         isReset
           ? this.logger.error(`Data remains after reset. Review registry: ${registryFile}`)
           : this.logger.info(`Registry saved: ${registryFile}`);
