@@ -5,7 +5,7 @@ import js_beautify from "js-beautify";
 import VError from "verror";
 import arrify from "arrify";
 import crypto from "crypto";
-import isEqual from "lodash.isEqual";
+import isEqual from "lodash.isequal";
 import uniq from "lodash.uniq";
 import emptyDir from "empty-dir";
 import { clone, Operation } from "resettable";

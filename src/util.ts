@@ -3,7 +3,7 @@ import * as path from "path";
 import * as util from "util";
 import * as fs from "fs-extra";
 import yaml from "js-yaml";
-import isEqual from "lodash.isEqual";
+import isEqual from "lodash.isequal";
 import get from "lodash.get";
 import has from "lodash.has";
 import set from "lodash.set";

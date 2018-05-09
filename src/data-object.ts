@@ -4,7 +4,7 @@ import arrify from "arrify";
 import has from "lodash.has";
 import get from "lodash.get";
 import set from "lodash.set";
-import isEqual from "lodash.isEqual";
+import isEqual from "lodash.isequal";
 import { VError } from "verror";
 import InternalData, { InternalDataInterface } from "internal-data";
 import { Logger, Data, Path, Format } from "./@types/";
