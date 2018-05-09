@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+
+# [0.3.0](https://github.com/ozum/resettable-file/compare/v0.2.5...v0.3.0) (2018-05-09)
+
+### Features
+
+* do not save registry file to disk if not changed ([ece23e9](https://github.com/ozum/resettable-file/commit/ece23e9))
+
 <a name="0.2.5"></a>
 
 ## [0.2.5](https://github.com/ozum/resettable-file/compare/v0.2.4...v0.2.5) (2018-05-08)
