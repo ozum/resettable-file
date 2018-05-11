@@ -217,6 +217,8 @@ export default class DataObject {
    * Path may be given as chained. (i.e "scripts.compile")
    * @param   {Path}      path    - Path to store data at.
    * @param   {*}         value   - Value to store at given key.
+   * @param   {Object}    [options]             - Options
+   * @param   {boolean}   [options.force=false] - Whether to force change even value is altered by user manually.
    * @returns {this}              - Object instance.
    */
   set(path: Path, value: any, { force = false } = {}): this {
