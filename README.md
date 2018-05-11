@@ -39,6 +39,7 @@ Resettable files for creating and maintaining boilerplates and configurations
     * [resettableFile.fromSourceRoot(...part) ⇒ <code>string</code>](#resettablefilefromsourcerootpart-%E2%87%92-codestringcode)
     * [resettableFile.isDataFile(projectFile) ⇒ <code>boolean</code>](#resettablefileisdatafileprojectfile-%E2%87%92-codebooleancode)
     * [resettableFile.hasFileSync(projectFiles, [t], [f]) ⇒ <code>\*</code>](#resettablefilehasfilesyncprojectfiles-t-f-%E2%87%92-code%5Ccode)
+    * [resettableFile.isBrokenLink(projectFile) ⇒ <code>boolena</code>](#resettablefileisbrokenlinkprojectfile-%E2%87%92-codeboolenacode)
     * [resettableFile.saveSync() ⇒ <code>void</code>](#resettablefilesavesync-%E2%87%92-codevoidcode)
     * [resettableFile.resetSync() ⇒ <code>void</code>](#resettablefileresetsync-%E2%87%92-codevoidcode)
     * [resettableFile.resetFileSync(projectFile) ⇒ <code>void</code>](#resettablefileresetfilesyncprojectfile-%E2%87%92-codevoidcode)
@@ -373,6 +374,7 @@ by <code>reset()</code> method.</p>
   * [.fromSourceRoot(...part)](#ResettableFile+fromSourceRoot) ⇒ <code>string</code>
   * [.isDataFile(projectFile)](#ResettableFile+isDataFile) ⇒ <code>boolean</code>
   * [.hasFileSync(projectFiles, [t], [f])](#ResettableFile+hasFileSync) ⇒ <code>\*</code>
+  * [.isBrokenLink(projectFile)](#ResettableFile+isBrokenLink) ⇒ <code>boolena</code>
   * [.saveSync()](#ResettableFile+saveSync) ⇒ <code>void</code>
   * [.resetSync()](#ResettableFile+resetSync) ⇒ <code>void</code>
   * [.resetFileSync(projectFile)](#ResettableFile+resetFileSync) ⇒ <code>void</code>
@@ -506,7 +508,8 @@ resettable.fromSourceRoot("path/to/file.txt"); // sourcedir/path/to/file.txt
 
 ### resettableFile.hasFileSync(projectFiles, [t], [f]) ⇒ <code>\*</code>
 
-<p>Returns one of the given values based on existence of given file path or file paths in root.</p>
+<p>Returns one of the given values based on existence of given file path or file paths in root.
+Returns true for broken links. (Links which points to non-existing paths, which <code>fs.existsSync()</code> returns false)</p>
 
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Returns**: <code>\*</code> - <ul>
@@ -519,6 +522,22 @@ resettable.fromSourceRoot("path/to/file.txt"); // sourcedir/path/to/file.txt
 | projectFiles | <code>string</code> \| <code>Array.&lt;string&gt;</code> |                    | <p>File or list of files to look in root.</p>               |
 | [t]          | <code>\*</code>                                          | <code>true</code>  | <p>Value to return if any of the files exists in root.</p>  |
 | [f]          | <code>\*</code>                                          | <code>false</code> | <p>Value to return if none of the files exists in root.</p> |
+
+<a name="ResettableFile+isBrokenLink"></a>
+
+### resettableFile.isBrokenLink(projectFile) ⇒ <code>boolena</code>
+
+<p>Returns whether given project file is a broken link. (Links which points to non-existing paths)</p>
+
+**Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
+**Returns**: <code>boolena</code> - <ul>
+
+<li>Whether given project file is a broken link.</li>
+</ul>  
+
+| Param       | Type                | Description                   |
+| ----------- | ------------------- | ----------------------------- |
+| projectFile | <code>string</code> | <p>Project file to check.</p> |
 
 <a name="ResettableFile+saveSync"></a>
 
@@ -769,13 +788,14 @@ project.writeFile("./some-config.json", '{"name": "my-project"}'); // Writes giv
   <li>Throws error if file cannot be deleted.</li>
   </ul>
 
-| Param           | Type                 | Default                   | Description                                                                                                           |
-| --------------- | -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| projectFile     | <code>string</code>  |                           | <p>File path relative to paroject root.</p>                                                                           |
-| [options]       | <code>Object</code>  |                           | <p>Options</p>                                                                                                        |
-| [options.force] | <code>boolean</code> | <code>false</code>        | <p>Deletes file even it exists and not auto created.</p>                                                              |
-| [options.track] | <code>boolean</code> | <code>[this.track]</code> | <p>Whether to operate in tracked mode. In non-tracked mode existing files are not deleted if force is not active.</p> |
-| [options.log]   | <code>boolean</code> | <code>true</code>         | <p>Whether to log operation.</p>                                                                                      |
+| Param                | Type                 | Default                   | Description                                                                                                           |
+| -------------------- | -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| projectFile          | <code>string</code>  |                           | <p>File path relative to paroject root.</p>                                                                           |
+| [options]            | <code>Object</code>  |                           | <p>Options</p>                                                                                                        |
+| [options.force]      | <code>boolean</code> | <code>false</code>        | <p>Deletes file even it exists and not auto created.</p>                                                              |
+| [options.track]      | <code>boolean</code> | <code>[this.track]</code> | <p>Whether to operate in tracked mode. In non-tracked mode existing files are not deleted if force is not active.</p> |
+| [options.log]        | <code>boolean</code> | <code>true</code>         | <p>Whether to log operation.</p>                                                                                      |
+| [options.brokenLink] | <code>boolean</code> | <code>false</code>        | <p>Whether project file is a broken link. Broken links are treated as if they do not exist.</p>                       |
 
 **Example**
 

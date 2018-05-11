@@ -13,7 +13,7 @@ import { InternalDataInterface } from "internal-data";
 
 import DataObject from "./data-object";
 import { getLogger, setLogLevel, getLogLevel } from "./logger";
-import { log, isEmptyRegistry, extensionFormat, serializeData, parseData, getFileFormat, hashObject } from "./util";
+import { log, isEmptyRegistry, extensionFormat, serializeData, parseData, getFileFormat, hashObject, fileExistsSync } from "./util";
 import { Format, FileDetail, Path, BasicLogger, Data, FileOptions, Registry } from "./@types";
 
 const DEFAULT_REGISTRY: Registry = { createdDataFiles: [], files: {}, directories: [] };
@@ -160,13 +160,24 @@ export default class ResettableFile {
 
   /**
    * Returns one of the given values based on existence of given file path or file paths in root.
+   * Returns true for broken links. (Links which points to non-existing paths, which `fs.existsSync()` returns false)
    * @param   {string|Array<string>}  projectFiles  - File or list of files to look in root.
    * @param   {*}                     [t=true]      - Value to return if any of the files exists in root.
    * @param   {*}                     [f=false]     - Value to return if none of the files exists in root.
    * @return  {*}                                   - `t` or `f` value based on existence of files in root.
    */
   hasFileSync<T = true, F = false>(projectFiles: string | string[], t: T = (true as any) as T, f: F = (false as any) as F): T | F {
-    return arrify(projectFiles).find(file => fs.existsSync(this.fromRoot(file))) ? t : f;
+    return arrify(projectFiles).find(projectFile => fileExistsSync(this.fromRoot(projectFile))) ? t : f;
+  }
+
+  /**
+   * Returns whether given project file is a broken link. (Links which points to non-existing paths)
+   * @param   {string}  projectFile - Project file to check.
+   * @returns {boolena}             - Whether given project file is a broken link.
+   */
+  isBrokenLink(projectFile: string): boolean {
+    const file = this.fromRoot(projectFile);
+    return fileExistsSync(file) && !fs.existsSync(file);
   }
 
   /**
@@ -288,9 +299,14 @@ export default class ResettableFile {
     const result: FileDetail = { isSafe: false };
     const registryValue = internal.registry.files[projectFile];
     const isInRegistry = projectFile in internal.registry.files;
-    const exists = this.hasFileSync(projectFile);
 
     try {
+      if (this.isBrokenLink(projectFile)) {
+        this.deleteFileSync(projectFile, { track, isBrokenLink: true });
+      }
+
+      const exists = this.hasFileSync(projectFile);
+
       if (exists) {
         const realPath = fs.realpathSync(filePath);
         result.stats = fs.lstatSync(filePath);
@@ -637,17 +653,19 @@ export default class ResettableFile {
    * @param   {boolean}       [options.force=false]         - Deletes file even it exists and not auto created.
    * @param   {boolean}       [options.track=[this.track]]  - Whether to operate in tracked mode. In non-tracked mode existing files are not deleted if force is not active.
    * @param   {boolean}       [options.log=true]            - Whether to log operation.
+   * @param   {boolean}       [options.brokenLink=false]    - Whether project file is a broken link. Broken links are treated as if they do not exist.
    * @returns {void}
    * @throws  {VError}                                      - Throws error if file cannot be deleted.
    * @example
    * project.copy("./some-config.json", "./some-config.json"); // Copies some-config.json file from module's root to project's root.
    */
-  deleteFileSync(projectFile: string, { force = false, track = this.track, log = true } = {}) {
+  deleteFileSync(projectFile: string, { force = false, track = this.track, log = true, isBrokenLink = false } = {}) {
     const internal = internalData.get(this);
     const file = this.fromRoot(projectFile);
-    const { isSafe, stats } = this.hasFileSync(projectFile)
-      ? this.getFileDetailsSync(projectFile, { force, track })
-      : { isSafe: true, stats: undefined };
+    const { isSafe, stats } =
+      isBrokenLink || !this.hasFileSync(projectFile)
+        ? { isSafe: true, stats: undefined }
+        : this.getFileDetailsSync(projectFile, { force, track });
 
     if (stats && stats.isDirectory()) {
       throw new VError(`Cannot delete (It is a directory). Use "deleteDir": ${file}`);

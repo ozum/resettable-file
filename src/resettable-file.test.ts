@@ -52,6 +52,8 @@ async function clear(projectNo: number | "" = ""): Promise<void> {
 
 beforeAll(async () => {
   try {
+    // Create broken link temporarily, otherwise git does not allow push with broken link.
+    await exec(`ln -s ./non-existing-file ${path.join(paths.projectMaster, "broken-link.json")}`);
     resettableFile = await refresh();
   } catch (e) {
     console.error(e);
@@ -60,6 +62,8 @@ beforeAll(async () => {
 
 afterAll(async () => {
   try {
+    // Delete broken link, otherwise git does not allow push.
+    fs.removeSync(path.join(paths.projectMaster, "broken-link.json"));
     await Promise.all([clear(), clear(2)]);
   } catch (e) {
     console.error(e);
@@ -132,6 +136,24 @@ describe("ResettableFile", () => {
       resettableFile.createSymLinkSync("some-config/link-target.json", "user-created.json");
       const content = fs.readJsonSync(path.join(paths.project, "user-created.json"));
       expect(content).toEqual({ Manual: "Custom" });
+    });
+
+    it("should not create symbolic link if manual created symlink exists", () => {
+      const existingTarget1 = fs.realpathSync(resettableFile.fromRoot("link-to-data.json"));
+      resettableFile.createSymLinkSync("some-config/link-target.json", "link-to-data.json");
+      const existingTarget2 = fs.realpathSync(resettableFile.fromRoot("link-to-data.json"));
+      expect(existingTarget1).toEqual(existingTarget2);
+    });
+
+    it("should overwrite file and create symbolic link if manual created symlink is broken", () => {
+      const file = resettableFile.fromRoot("broken-link.json");
+
+      const brokenLinkExists = fs.lstatSync(file) !== undefined; // Some IDE's do not show them in file explorer
+      const isBrokenLink = resettableFile.isBrokenLink("broken-link.json");
+      resettableFile.createSymLinkSync("some-config/link-target.json", "broken-link.json");
+      const brokenLinkExistsAfter = fs.lstatSync(file) !== undefined; // Some IDE's do not show them in file explorer
+      const isBrokenLinkAfter = resettableFile.isBrokenLink("broken-link.json");
+      expect([brokenLinkExists, isBrokenLink, brokenLinkExistsAfter, isBrokenLinkAfter]).toEqual([true, true, true, false]);
     });
 
     it("should create symbolic link if manual created file exists (force = true)", () => {

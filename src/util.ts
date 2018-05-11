@@ -145,3 +145,22 @@ export function getFileFormat(file: string): Format | undefined {
   }
   throw new VError("Cannot determine format. No format provided, file name has no extension and no file to look content.");
 }
+
+/**
+ * Returns whether given file exists. Different from `fs.existsSync()` returns `true` for broken links (links
+ * which points to non-existing targets, which `fs.existsSync()` returns false)
+ * @param   {string}  file  - File to check.
+ * @returns {boolean}       - Whether file exists.
+ * @private
+ */
+export function fileExistsSync(file: string): boolean {
+  try {
+    return fs.lstatSync(file) !== undefined;
+  } catch (e) {
+    /* istanbul ignore if */
+    if (e.code !== "ENOENT") {
+      throw e;
+    }
+    return false;
+  }
+}
