@@ -4,6 +4,63 @@
   "description": "Resettable files for creating and maintaining boilerplates",
   "main": "lib/index",
   "types": "lib/index",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozum/resettable-file.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "resettable",
+    "undo",
+    "reset"
+  ],
+  "author": {
+    "name": "Özüm Eldoğan"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ozum/resettable-file/issues"
+  },
+  "homepage": "https://github.com/ozum/resettable-file#readme",
+  "readme": "README.md",
+  "_id": "resettable-file@0.0.1",
+  "devDependencies": {
+    "@types/arrify": "^1.0.4",
+    "@types/fs-extra": "^5.0.2",
+    "@types/js-beautify": "0.0.31",
+    "@types/js-yaml": "^3.11.1",
+    "@types/lodash.get": "^4.4.3",
+    "@types/lodash.has": "^4.5.3",
+    "@types/lodash.isempty": "^4.4.3",
+    "@types/lodash.isequal": "^4.5.2",
+    "@types/lodash.set": "^4.3.3",
+    "@types/lodash.uniq": "^4.5.3",
+    "@types/verror": "^1.10.3",
+    "internal-data": "^0.3.1",
+    "moe-scripts": "^0.1.9"
+  },
+  "dependencies": {
+    "arrify": "^1.0.1",
+    "empty-dir": "^1.0.0",
+    "fs-extra": "^6.0.1",
+    "js-beautify": "^1.7.5",
+    "js-yaml": "^3.11.0",
+    "lodash.get": "^4.4.2",
+    "lodash.has": "^4.5.2",
+    "lodash.isempty": "^4.4.0",
+    "lodash.isequal": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "lodash.uniq": "^4.5.0",
+    "resettable": "^0.1.19",
+    "sort-keys": "^2.0.0",
+    "verror": "^1.10.0",
+    "winston": "^3.0.0-rc5"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "@types"
+  ],
   "scripts": {
     "build": "moe-scripts build",
     "build:doc": "moe-scripts doc --no-cache",
@@ -18,52 +75,5 @@
     "test:update": "moe-scripts test --updateSnapshot",
     "validate": "moe-scripts validate",
     "watch": "concurrently 'npm run build -- --watch' 'npm run test -- --watch' | awk '{gsub(/\\033c/,\"\") system(\"\")}1'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ozum/resettable-file.git"
-  },
-  "keywords": ["boilerplate", "resettable", "undo", "reset"],
-  "author": {
-    "name": "Özüm Eldoğan"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ozum/resettable-file/issues"
-  },
-  "homepage": "https://github.com/ozum/resettable-file#readme",
-  "readme": "README.md",
-  "_id": "resettable-file@0.0.1",
-  "devDependencies": {
-    "@types/arrify": "^1.0.3",
-    "@types/fs-extra": "^5.0.2",
-    "@types/js-beautify": "0.0.31",
-    "@types/js-yaml": "^3.11.1",
-    "@types/lodash.get": "^4.4.3",
-    "@types/lodash.has": "^4.5.3",
-    "@types/lodash.isempty": "^4.4.3",
-    "@types/lodash.isequal": "^4.5.2",
-    "@types/lodash.set": "^4.3.3",
-    "@types/lodash.uniq": "^4.5.3",
-    "@types/verror": "^1.10.3",
-    "internal-data": "^0.3.1",
-    "moe-scripts": "0.0.61"
-  },
-  "dependencies": {
-    "arrify": "^1.0.1",
-    "empty-dir": "^1.0.0",
-    "fs-extra": "^6.0.0",
-    "js-beautify": "^1.7.5",
-    "js-yaml": "^3.11.0",
-    "lodash.get": "^4.4.2",
-    "lodash.has": "^4.5.2",
-    "lodash.isempty": "^4.4.0",
-    "lodash.isequal": "^4.5.0",
-    "lodash.set": "^4.3.2",
-    "lodash.uniq": "^4.5.0",
-    "resettable": "^0.1.18",
-    "sort-keys": "^2.0.0",
-    "verror": "^1.10.0",
-    "winston": "^3.0.0-rc5"
   }
 }
