@@ -1,6 +1,6 @@
 {
   "name": "resettable-file",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Resettable files for creating and maintaining boilerplates",
   "main": "lib/index",
   "types": "lib/index",
