@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.8"></a>
+## [0.3.8](https://github.com/ozum/resettable-file/compare/v0.3.6...v0.3.8) (2018-07-10)
+
+
+### Bug Fixes
+
+* fix winston constructor ([fc4be2a](https://github.com/ozum/resettable-file/commit/fc4be2a))
+
+
+
 <a name="0.3.6"></a>
 
 ## [0.3.6](https://github.com/ozum/resettable-file/compare/v0.3.5...v0.3.6) (2018-05-11)
