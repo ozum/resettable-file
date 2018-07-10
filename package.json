@@ -1,6 +1,6 @@
 {
   "name": "resettable-file",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Resettable files for creating and maintaining boilerplates",
   "main": "lib/index",
   "types": "lib/index",
@@ -37,7 +37,7 @@
     "@types/lodash.uniq": "^4.5.3",
     "@types/verror": "^1.10.3",
     "internal-data": "^0.3.1",
-    "moe-scripts": "^0.1.9"
+    "moe-scripts": "0.1.14"
   },
   "dependencies": {
     "arrify": "^1.0.1",
@@ -51,10 +51,12 @@
     "lodash.isequal": "^4.5.0",
     "lodash.set": "^4.3.2",
     "lodash.uniq": "^4.5.0",
+    "moe-scripts": "^0.1.14",
     "resettable": "^0.1.19",
+    "sane": "^2.5.2",
     "sort-keys": "^2.0.0",
     "verror": "^1.10.0",
-    "winston": "^3.0.0-rc5"
+    "winston": "^3.0.0"
   },
   "files": [
     "lib",

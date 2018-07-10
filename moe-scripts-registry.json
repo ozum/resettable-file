@@ -32,8 +32,7 @@
           "commit": "moe-scripts commit",
           "prepublishOnly": "npm run build",
           "squash": "BRANCH=`git rev-parse --abbrev-ref HEAD` && git checkout master && git merge --squash $BRANCH && npm run commit",
-          "release":
-            "git checkout master && git pull origin master && standard-version && git push --follow-tags origin master && npm publish"
+          "release": "git checkout master && git pull origin master && standard-version && git push --follow-tags origin master && npm publish"
         }
       },
       {
@@ -43,7 +42,11 @@
       {
         "op": "test",
         "path": "/files",
-        "value": ["lib", "bin", "@types"]
+        "value": [
+          "lib",
+          "bin",
+          "@types"
+        ]
       },
       {
         "op": "remove",
