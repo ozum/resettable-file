@@ -2,7 +2,7 @@ const winston = require("winston");
 import { BasicLogger, Logger, Data } from "./@types";
 
 export function getLogger(level: keyof BasicLogger): BasicLogger {
-  return new winston.createLogger({
+  return winston.createLogger({
     transports: [
       new winston.transports.Console({
         level,
