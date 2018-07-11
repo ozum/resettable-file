@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.12"></a>
+
+## [0.3.12](https://github.com/ozum/resettable-file/compare/v0.3.11...v0.3.12) (2018-07-11)
+
 <a name="0.3.11"></a>
 
 ## [0.3.11](https://github.com/ozum/resettable-file/compare/v0.3.10...v0.3.11) (2018-07-11)
