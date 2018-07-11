@@ -37,7 +37,7 @@
     "@types/lodash.uniq": "^4.5.3",
     "@types/verror": "^1.10.3",
     "internal-data": "^0.3.1",
-    "moe-scripts": "0.1.15"
+    "moe-scripts": "0.1.16"
   },
   "dependencies": {
     "arrify": "^1.0.1",
