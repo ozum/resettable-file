@@ -2,20 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<a name="0.3.9"></a>
-## [0.3.9](https://github.com/ozum/resettable-file/compare/v0.3.8...v0.3.9) (2018-07-11)
+<a name="0.3.10"></a>
 
-
-
-<a name="0.3.8"></a>
-## [0.3.8](https://github.com/ozum/resettable-file/compare/v0.3.6...v0.3.8) (2018-07-10)
-
+## [0.3.10](https://github.com/ozum/resettable-file/compare/v0.3.9...v0.3.10) (2018-07-11)
 
 ### Bug Fixes
 
-* fix winston constructor ([fc4be2a](https://github.com/ozum/resettable-file/commit/fc4be2a))
+- update packages ([525b2a2](https://github.com/ozum/resettable-file/commit/525b2a2))
 
+<a name="0.3.9"></a>
 
+## [0.3.9](https://github.com/ozum/resettable-file/compare/v0.3.8...v0.3.9) (2018-07-11)
+
+<a name="0.3.8"></a>
+
+## [0.3.8](https://github.com/ozum/resettable-file/compare/v0.3.6...v0.3.8) (2018-07-10)
+
+### Bug Fixes
+
+- fix winston constructor ([fc4be2a](https://github.com/ozum/resettable-file/commit/fc4be2a))
 
 <a name="0.3.6"></a>
 
@@ -31,7 +36,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* create broken-link temporarily ([d12a70c](https://github.com/ozum/resettable-file/commit/d12a70c))
+- create broken-link temporarily ([d12a70c](https://github.com/ozum/resettable-file/commit/d12a70c))
 
 <a name="0.3.3"></a>
 
@@ -55,7 +60,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* do not save registry file to disk if not changed ([ece23e9](https://github.com/ozum/resettable-file/commit/ece23e9))
+- do not save registry file to disk if not changed ([ece23e9](https://github.com/ozum/resettable-file/commit/ece23e9))
 
 <a name="0.2.5"></a>
 
@@ -63,7 +68,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* fix duplicate process in reset and resetDataFileSync file name ([ddd734e](https://github.com/ozum/resettable-file/commit/ddd734e))
+- fix duplicate process in reset and resetDataFileSync file name ([ddd734e](https://github.com/ozum/resettable-file/commit/ddd734e))
 
 <a name="0.2.4"></a>
 
@@ -75,7 +80,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* dont log if no files are written to disk ([84507f7](https://github.com/ozum/resettable-file/commit/84507f7))
+- dont log if no files are written to disk ([84507f7](https://github.com/ozum/resettable-file/commit/84507f7))
 
 <a name="0.2.2"></a>
 
@@ -87,7 +92,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* make ResettableFile.logger non-singleton ([9435c20](https://github.com/ozum/resettable-file/commit/9435c20))
+- make ResettableFile.logger non-singleton ([9435c20](https://github.com/ozum/resettable-file/commit/9435c20))
 
 <a name="0.2.0"></a>
 
@@ -95,7 +100,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* add read/write ResettableFile.logLevel attribute ([9a96a4e](https://github.com/ozum/resettable-file/commit/9a96a4e))
+- add read/write ResettableFile.logLevel attribute ([9a96a4e](https://github.com/ozum/resettable-file/commit/9a96a4e))
 
 <a name="0.1.6"></a>
 
@@ -115,7 +120,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* export DataObject ([d151086](https://github.com/ozum/resettable-file/commit/d151086))
+- export DataObject ([d151086](https://github.com/ozum/resettable-file/commit/d151086))
 
 <a name="0.1.2"></a>
 
@@ -123,7 +128,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* export types ([8a54434](https://github.com/ozum/resettable-file/commit/8a54434))
+- export types ([8a54434](https://github.com/ozum/resettable-file/commit/8a54434))
 
 <a name="0.1.1"></a>
 
@@ -131,7 +136,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* fix readme.md ([d53226d](https://github.com/ozum/resettable-file/commit/d53226d))
+- fix readme.md ([d53226d](https://github.com/ozum/resettable-file/commit/d53226d))
 
 <a name="0.1.0"></a>
 
@@ -139,7 +144,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* initial version ([a2d15f6](https://github.com/ozum/resettable-file/commit/a2d15f6))
+- initial version ([a2d15f6](https://github.com/ozum/resettable-file/commit/a2d15f6))
 
 <!-- Titles: Added, Changed, Deprecated, Removed, Fixed, Security -->
 
@@ -149,4 +154,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### 0.0.1 - 2018-04-24
 
-* Initial version
+- Initial version
