@@ -7,53 +7,52 @@ Resettable files for creating and maintaining boilerplates and configurations
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-* [Description](#description)
-* [Synopsis](#synopsis)
-* [Reset](#reset)
-* [API](#api)
-  * [Classes](#classes)
-  * [DataObject](#dataobject)
-    * [new DataObject([data], [options])](#new-dataobjectdata-options)
-    * [dataObject.isChanged : <code>boolean</code>](#dataobjectischanged--codebooleancode)
-    * [dataObject.data : <code>Data</code>](#dataobjectdata--codedatacode)
-    * [dataObject.original : <code>Data</code>](#dataobjectoriginal--codedatacode)
-    * [dataObject.snapshot : <code>Data</code>](#dataobjectsnapshot--codedatacode)
-    * [dataObject.has(props, [t], [f]) ⇒ <code>\*</code>](#dataobjecthasprops-t-f-%E2%87%92-code%5Ccode)
-    * [dataObject.hasSubProp(prop, subProps, [t], [f]) ⇒ <code>\*</code>](#dataobjecthassubpropprop-subprops-t-f-%E2%87%92-code%5Ccode)
-    * [dataObject.get(path) ⇒ <code>\*</code>](#dataobjectgetpath-%E2%87%92-code%5Ccode)
-    * [dataObject.set(path, value, [options]) ⇒ <code>this</code>](#dataobjectsetpath-value-options-%E2%87%92-codethiscode)
-    * [dataObject.setObject(data, [options]) ⇒ <code>this</code>](#dataobjectsetobjectdata-options-%E2%87%92-codethiscode)
-    * [dataObject.remove(path, [options]) ⇒ <code>this</code>](#dataobjectremovepath-options-%E2%87%92-codethiscode)
-    * [dataObject.reset() ⇒ <code>Array.&lt;Operation&gt;</code>](#dataobjectreset-%E2%87%92-codearrayltoperationgtcode)
-  * [ResettableFile](#resettablefile)
-    * [new ResettableFile(registryFile, [options])](#new-resettablefileregistryfile-options)
-    * [resettableFile.root : <code>string</code>](#resettablefileroot--codestringcode)
-    * [resettableFile.sourceRoot : <code>string</code>](#resettablefilesourceroot--codestringcode)
-    * [resettableFile.track : <code>boolean</code>](#resettablefiletrack--codebooleancode)
-    * [resettableFile.logger : <code>BasicLogger</code>](#resettablefilelogger--codebasicloggercode)
-    * [resettableFile.logLevel : <code>string</code>](#resettablefileloglevel--codestringcode)
-    * [resettableFile.fromRoot(...part) ⇒ <code>string</code>](#resettablefilefromrootpart-%E2%87%92-codestringcode)
-    * [resettableFile.fromSourceRoot(...part) ⇒ <code>string</code>](#resettablefilefromsourcerootpart-%E2%87%92-codestringcode)
-    * [resettableFile.isDataFile(projectFile) ⇒ <code>boolean</code>](#resettablefileisdatafileprojectfile-%E2%87%92-codebooleancode)
-    * [resettableFile.hasFileSync(projectFiles, [t], [f]) ⇒ <code>\*</code>](#resettablefilehasfilesyncprojectfiles-t-f-%E2%87%92-code%5Ccode)
-    * [resettableFile.isBrokenLink(projectFile) ⇒ <code>boolena</code>](#resettablefileisbrokenlinkprojectfile-%E2%87%92-codeboolenacode)
-    * [resettableFile.saveSync() ⇒ <code>void</code>](#resettablefilesavesync-%E2%87%92-codevoidcode)
-    * [resettableFile.resetSync() ⇒ <code>void</code>](#resettablefileresetsync-%E2%87%92-codevoidcode)
-    * [resettableFile.resetFileSync(projectFile) ⇒ <code>void</code>](#resettablefileresetfilesyncprojectfile-%E2%87%92-codevoidcode)
-    * [resettableFile.getFileDetailsSync(projectFile, options) ⇒ <code>FileDetail</code>](#resettablefilegetfiledetailssyncprojectfile-options-%E2%87%92-codefiledetailcode)
-    * [resettableFile.getFileHashSync(projectFile) ⇒ <code>string</code>](#resettablefilegetfilehashsyncprojectfile-%E2%87%92-codestringcode)
-    * [resettableFile.getDataObjectSync(projectFile, [options]) ⇒ <code>DataObject</code>](#resettablefilegetdataobjectsyncprojectfile-options-%E2%87%92-codedataobjectcode)
-    * [resettableFile.createSymLinkSync(targetFile, projectFile, [options]) ⇒ <code>void</code>](#resettablefilecreatesymlinksynctargetfile-projectfile-options-%E2%87%92-codevoidcode)
-    * [resettableFile.readFileSync(projectFile, [options]) ⇒ <code>\*</code>](#resettablefilereadfilesyncprojectfile-options-%E2%87%92-code%5Ccode)
-    * [resettableFile.readFileDetailedSync(projectFile, [options]) ⇒ <code>Object</code>](#resettablefilereadfiledetailedsyncprojectfile-options-%E2%87%92-codeobjectcode)
-    * [resettableFile.writeFileSync(projectFile, data, [options]) ⇒ <code>void</code>](#resettablefilewritefilesyncprojectfile-data-options-%E2%87%92-codevoidcode)
-    * [resettableFile.deleteFileSync(projectFile, [options]) ⇒ <code>void</code>](#resettablefiledeletefilesyncprojectfile-options-%E2%87%92-codevoidcode)
-    * [resettableFile.copyFileSync(sourceFile, projectFile, [options]) ⇒ <code>void</code>](#resettablefilecopyfilesyncsourcefile-projectfile-options-%E2%87%92-codevoidcode)
-    * [resettableFile.createDirSync(projectDir, [options]) ⇒ <code>void</code>](#resettablefilecreatedirsyncprojectdir-options-%E2%87%92-codevoidcode)
-    * [resettableFile.deleteDirSync(projectDir, [options]) ⇒ <code>void</code>](#resettablefiledeletedirsyncprojectdir-options-%E2%87%92-codevoidcode)
+- [Description](#description)
+- [Synopsis](#synopsis)
+- [Reset](#reset)
+- [API](#api)
+  - [Classes](#classes)
+  - [DataObject](#dataobject)
+    - [new DataObject([data], [options])](#new-dataobjectdata-options)
+    - [dataObject.isChanged : <code>boolean</code>](#dataobjectischanged--codebooleancode)
+    - [dataObject.data : <code>Data</code>](#dataobjectdata--codedatacode)
+    - [dataObject.original : <code>Data</code>](#dataobjectoriginal--codedatacode)
+    - [dataObject.snapshot : <code>Data</code>](#dataobjectsnapshot--codedatacode)
+    - [dataObject.has(props, [t], [f]) ⇒ <code>\*</code>](#dataobjecthasprops-t-f-%E2%87%92-code%5Ccode)
+    - [dataObject.hasSubProp(prop, subProps, [t], [f]) ⇒ <code>\*</code>](#dataobjecthassubpropprop-subprops-t-f-%E2%87%92-code%5Ccode)
+    - [dataObject.get(path) ⇒ <code>\*</code>](#dataobjectgetpath-%E2%87%92-code%5Ccode)
+    - [dataObject.set(path, value, [options]) ⇒ <code>this</code>](#dataobjectsetpath-value-options-%E2%87%92-codethiscode)
+    - [dataObject.setObject(data, [options]) ⇒ <code>this</code>](#dataobjectsetobjectdata-options-%E2%87%92-codethiscode)
+    - [dataObject.remove(path, [options]) ⇒ <code>this</code>](#dataobjectremovepath-options-%E2%87%92-codethiscode)
+    - [dataObject.reset() ⇒ <code>Array.&lt;Operation&gt;</code>](#dataobjectreset-%E2%87%92-codearrayltoperationgtcode)
+  - [ResettableFile](#resettablefile)
+    - [new ResettableFile(registryFile, [options])](#new-resettablefileregistryfile-options)
+    - [resettableFile.root : <code>string</code>](#resettablefileroot--codestringcode)
+    - [resettableFile.sourceRoot : <code>string</code>](#resettablefilesourceroot--codestringcode)
+    - [resettableFile.track : <code>boolean</code>](#resettablefiletrack--codebooleancode)
+    - [resettableFile.logger : <code>BasicLogger</code>](#resettablefilelogger--codebasicloggercode)
+    - [resettableFile.logLevel : <code>string</code>](#resettablefileloglevel--codestringcode)
+    - [resettableFile.fromRoot(...part) ⇒ <code>string</code>](#resettablefilefromrootpart-%E2%87%92-codestringcode)
+    - [resettableFile.fromSourceRoot(...part) ⇒ <code>string</code>](#resettablefilefromsourcerootpart-%E2%87%92-codestringcode)
+    - [resettableFile.isDataFile(projectFile) ⇒ <code>boolean</code>](#resettablefileisdatafileprojectfile-%E2%87%92-codebooleancode)
+    - [resettableFile.hasFileSync(projectFiles, [t], [f]) ⇒ <code>\*</code>](#resettablefilehasfilesyncprojectfiles-t-f-%E2%87%92-code%5Ccode)
+    - [resettableFile.isBrokenLink(projectFile) ⇒ <code>boolena</code>](#resettablefileisbrokenlinkprojectfile-%E2%87%92-codeboolenacode)
+    - [resettableFile.saveSync() ⇒ <code>void</code>](#resettablefilesavesync-%E2%87%92-codevoidcode)
+    - [resettableFile.resetSync() ⇒ <code>void</code>](#resettablefileresetsync-%E2%87%92-codevoidcode)
+    - [resettableFile.resetFileSync(projectFile) ⇒ <code>void</code>](#resettablefileresetfilesyncprojectfile-%E2%87%92-codevoidcode)
+    - [resettableFile.getFileDetailsSync(projectFile, options) ⇒ <code>FileDetail</code>](#resettablefilegetfiledetailssyncprojectfile-options-%E2%87%92-codefiledetailcode)
+    - [resettableFile.getFileHashSync(projectFile) ⇒ <code>string</code>](#resettablefilegetfilehashsyncprojectfile-%E2%87%92-codestringcode)
+    - [resettableFile.getDataObjectSync(projectFile, [options]) ⇒ <code>DataObject</code>](#resettablefilegetdataobjectsyncprojectfile-options-%E2%87%92-codedataobjectcode)
+    - [resettableFile.createSymLinkSync(targetFile, projectFile, [options]) ⇒ <code>void</code>](#resettablefilecreatesymlinksynctargetfile-projectfile-options-%E2%87%92-codevoidcode)
+    - [resettableFile.readFileSync(projectFile, [options]) ⇒ <code>\*</code>](#resettablefilereadfilesyncprojectfile-options-%E2%87%92-code%5Ccode)
+    - [resettableFile.readFileDetailedSync(projectFile, [options]) ⇒ <code>Object</code>](#resettablefilereadfiledetailedsyncprojectfile-options-%E2%87%92-codeobjectcode)
+    - [resettableFile.writeFileSync(projectFile, data, [options]) ⇒ <code>void</code>](#resettablefilewritefilesyncprojectfile-data-options-%E2%87%92-codevoidcode)
+    - [resettableFile.deleteFileSync(projectFile, [options]) ⇒ <code>void</code>](#resettablefiledeletefilesyncprojectfile-options-%E2%87%92-codevoidcode)
+    - [resettableFile.copyFileSync(sourceFile, projectFile, [options]) ⇒ <code>void</code>](#resettablefilecopyfilesyncsourcefile-projectfile-options-%E2%87%92-codevoidcode)
+    - [resettableFile.createDirSync(projectDir, [options]) ⇒ <code>void</code>](#resettablefilecreatedirsyncprojectdir-options-%E2%87%92-codevoidcode)
+    - [resettableFile.deleteDirSync(projectDir, [options]) ⇒ <code>void</code>](#resettablefiledeletedirsyncprojectdir-options-%E2%87%92-codevoidcode)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -104,25 +103,25 @@ resettableFile.resetSync();
 
 **Can**
 
-* Delete created files by this library if they are not changed outside.
-* Delete created symbolic links if they are not changed outside.
-* Delete created directories,
-  * if they are empty
-  * or all files in directories are created by this libray and they are not changed outside.
-* Reset key/value pairs in data files (modifictions made by this library)
-  * Delete created keys,
-  * Create old keys and values for deleted keys,
-  * Write old values to replaced keys,
-  * Delete created values from arrays
-  * Insert deleted values in to arrays (closest index possible)
+- Delete created files by this library if they are not changed outside.
+- Delete created symbolic links if they are not changed outside.
+- Delete created directories,
+  - if they are empty
+  - or all files in directories are created by this libray and they are not changed outside.
+- Reset key/value pairs in data files (modifictions made by this library)
+  - Delete created keys,
+  - Create old keys and values for deleted keys,
+  - Write old values to replaced keys,
+  - Delete created values from arrays
+  - Insert deleted values in to arrays (closest index possible)
 
 **Can't**
 
-* Create deleted files.
-* Create deleted directories.
-* Replace old content of files (except data files)
-* Recreate deleted directories
-* Recreate deleted symbolic links
+- Create deleted files.
+- Create deleted directories.
+- Replace old content of files (except data files)
+- Recreate deleted directories
+- Recreate deleted symbolic links
 
 As seen from what can and can't be done, `ResettableFile` is a utility to create and modify text based files and data files (json and yaml) and
 not a backup/version control for deleted files.
@@ -148,19 +147,19 @@ by <code>reset()</code> method.</p></dd>
 
 **Kind**: global class
 
-* [DataObject](#DataObject)
-  * [new DataObject([data], [options])](#new_DataObject_new)
-  * [.isChanged](#DataObject+isChanged) : <code>boolean</code>
-  * [.data](#DataObject+data) : <code>Data</code>
-  * [.original](#DataObject+original) : <code>Data</code>
-  * [.snapshot](#DataObject+snapshot) : <code>Data</code>
-  * [.has(props, [t], [f])](#DataObject+has) ⇒ <code>\*</code>
-  * [.hasSubProp(prop, subProps, [t], [f])](#DataObject+hasSubProp) ⇒ <code>\*</code>
-  * [.get(path)](#DataObject+get) ⇒ <code>\*</code>
-  * [.set(path, value, [options])](#DataObject+set) ⇒ <code>this</code>
-  * [.setObject(data, [options])](#DataObject+setObject) ⇒ <code>this</code>
-  * [.remove(path, [options])](#DataObject+remove) ⇒ <code>this</code>
-  * [.reset()](#DataObject+reset) ⇒ <code>Array.&lt;Operation&gt;</code>
+- [DataObject](#DataObject)
+  - [new DataObject([data], [options])](#new_DataObject_new)
+  - [.isChanged](#DataObject+isChanged) : <code>boolean</code>
+  - [.data](#DataObject+data) : <code>Data</code>
+  - [.original](#DataObject+original) : <code>Data</code>
+  - [.snapshot](#DataObject+snapshot) : <code>Data</code>
+  - [.has(props, [t], [f])](#DataObject+has) ⇒ <code>\*</code>
+  - [.hasSubProp(prop, subProps, [t], [f])](#DataObject+hasSubProp) ⇒ <code>\*</code>
+  - [.get(path)](#DataObject+get) ⇒ <code>\*</code>
+  - [.set(path, value, [options])](#DataObject+set) ⇒ <code>this</code>
+  - [.setObject(data, [options])](#DataObject+setObject) ⇒ <code>this</code>
+  - [.remove(path, [options])](#DataObject+remove) ⇒ <code>this</code>
+  - [.reset()](#DataObject+reset) ⇒ <code>Array.&lt;Operation&gt;</code>
 
 <a name="new_DataObject_new"></a>
 
@@ -222,7 +221,7 @@ Property names may be given as chained such as <code>key</code> or <code>key.sub
 **Returns**: <code>\*</code> - <ul>
 
 <li><code>t</code> or <code>f</code> value based on existence of property.</li>
-</ul>  
+</ul>
 
 | Param | Type                                                   | Default            | Description                                                         |
 | ----- | ------------------------------------------------------ | ------------------ | ------------------------------------------------------------------- |
@@ -247,7 +246,7 @@ Property names may be given as chained such as <code>key</code> or <code>key.sub
 **Returns**: <code>\*</code> - <ul>
 
 <li><code>t</code> or <code>f</code> value based on existence of sub property.</li>
-</ul>  
+</ul>
 
 | Param    | Type                                                   | Default            | Description                                              |
 | -------- | ------------------------------------------------------ | ------------------ | -------------------------------------------------------- |
@@ -273,7 +272,7 @@ const result2 = project.hasSubProp("address.home", ["street.name", "street.no"])
 **Returns**: <code>\*</code> - <ul>
 
 <li>Data stored at given key.</li>
-</ul>  
+</ul>
 
 | Param | Type              | Description                  |
 | ----- | ----------------- | ---------------------------- |
@@ -290,7 +289,7 @@ Path may be given as chained. (i.e &quot;scripts.compile&quot;)</p>
 **Returns**: <code>this</code> - <ul>
 
 <li>Object instance.</li>
-</ul>  
+</ul>
 
 | Param           | Type                 | Default            | Description                                                            |
 | --------------- | -------------------- | ------------------ | ---------------------------------------------------------------------- |
@@ -309,7 +308,7 @@ Path may be given as chained. (i.e &quot;scripts.compile&quot;)</p>
 **Returns**: <code>this</code> - <ul>
 
 <li>Object instance.</li>
-</ul>  
+</ul>
 
 | Param           | Type                 | Default            | Description                                                            |
 | --------------- | -------------------- | ------------------ | ---------------------------------------------------------------------- |
@@ -334,7 +333,7 @@ Path may be given as chained. (i.e &quot;scripts.compile&quot;)</p>
 **Returns**: <code>this</code> - <ul>
 
 <li>Object instance.</li>
-</ul>  
+</ul>
 
 | Param           | Type                                                   | Default            | Description                                                            |
 | --------------- | ------------------------------------------------------ | ------------------ | ---------------------------------------------------------------------- |
@@ -363,32 +362,32 @@ by <code>reset()</code> method.</p>
 
 **Kind**: global class
 
-* [ResettableFile](#ResettableFile)
-  * [new ResettableFile(registryFile, [options])](#new_ResettableFile_new)
-  * [.root](#ResettableFile+root) : <code>string</code>
-  * [.sourceRoot](#ResettableFile+sourceRoot) : <code>string</code>
-  * [.track](#ResettableFile+track) : <code>boolean</code>
-  * [.logger](#ResettableFile+logger) : <code>BasicLogger</code>
-  * [.logLevel](#ResettableFile+logLevel) : <code>string</code>
-  * [.fromRoot(...part)](#ResettableFile+fromRoot) ⇒ <code>string</code>
-  * [.fromSourceRoot(...part)](#ResettableFile+fromSourceRoot) ⇒ <code>string</code>
-  * [.isDataFile(projectFile)](#ResettableFile+isDataFile) ⇒ <code>boolean</code>
-  * [.hasFileSync(projectFiles, [t], [f])](#ResettableFile+hasFileSync) ⇒ <code>\*</code>
-  * [.isBrokenLink(projectFile)](#ResettableFile+isBrokenLink) ⇒ <code>boolena</code>
-  * [.saveSync()](#ResettableFile+saveSync) ⇒ <code>void</code>
-  * [.resetSync()](#ResettableFile+resetSync) ⇒ <code>void</code>
-  * [.resetFileSync(projectFile)](#ResettableFile+resetFileSync) ⇒ <code>void</code>
-  * [.getFileDetailsSync(projectFile, options)](#ResettableFile+getFileDetailsSync) ⇒ <code>FileDetail</code>
-  * [.getFileHashSync(projectFile)](#ResettableFile+getFileHashSync) ⇒ <code>string</code>
-  * [.getDataObjectSync(projectFile, [options])](#ResettableFile+getDataObjectSync) ⇒ [<code>DataObject</code>](#DataObject)
-  * [.createSymLinkSync(targetFile, projectFile, [options])](#ResettableFile+createSymLinkSync) ⇒ <code>void</code>
-  * [.readFileSync(projectFile, [options])](#ResettableFile+readFileSync) ⇒ <code>\*</code>
-  * [.readFileDetailedSync(projectFile, [options])](#ResettableFile+readFileDetailedSync) ⇒ <code>Object</code>
-  * [.writeFileSync(projectFile, data, [options])](#ResettableFile+writeFileSync) ⇒ <code>void</code>
-  * [.deleteFileSync(projectFile, [options])](#ResettableFile+deleteFileSync) ⇒ <code>void</code>
-  * [.copyFileSync(sourceFile, projectFile, [options])](#ResettableFile+copyFileSync) ⇒ <code>void</code>
-  * [.createDirSync(projectDir, [options])](#ResettableFile+createDirSync) ⇒ <code>void</code>
-  * [.deleteDirSync(projectDir, [options])](#ResettableFile+deleteDirSync) ⇒ <code>void</code>
+- [ResettableFile](#ResettableFile)
+  - [new ResettableFile(registryFile, [options])](#new_ResettableFile_new)
+  - [.root](#ResettableFile+root) : <code>string</code>
+  - [.sourceRoot](#ResettableFile+sourceRoot) : <code>string</code>
+  - [.track](#ResettableFile+track) : <code>boolean</code>
+  - [.logger](#ResettableFile+logger) : <code>BasicLogger</code>
+  - [.logLevel](#ResettableFile+logLevel) : <code>string</code>
+  - [.fromRoot(...part)](#ResettableFile+fromRoot) ⇒ <code>string</code>
+  - [.fromSourceRoot(...part)](#ResettableFile+fromSourceRoot) ⇒ <code>string</code>
+  - [.isDataFile(projectFile)](#ResettableFile+isDataFile) ⇒ <code>boolean</code>
+  - [.hasFileSync(projectFiles, [t], [f])](#ResettableFile+hasFileSync) ⇒ <code>\*</code>
+  - [.isBrokenLink(projectFile)](#ResettableFile+isBrokenLink) ⇒ <code>boolena</code>
+  - [.saveSync()](#ResettableFile+saveSync) ⇒ <code>void</code>
+  - [.resetSync()](#ResettableFile+resetSync) ⇒ <code>void</code>
+  - [.resetFileSync(projectFile)](#ResettableFile+resetFileSync) ⇒ <code>void</code>
+  - [.getFileDetailsSync(projectFile, options)](#ResettableFile+getFileDetailsSync) ⇒ <code>FileDetail</code>
+  - [.getFileHashSync(projectFile)](#ResettableFile+getFileHashSync) ⇒ <code>string</code>
+  - [.getDataObjectSync(projectFile, [options])](#ResettableFile+getDataObjectSync) ⇒ [<code>DataObject</code>](#DataObject)
+  - [.createSymLinkSync(targetFile, projectFile, [options])](#ResettableFile+createSymLinkSync) ⇒ <code>void</code>
+  - [.readFileSync(projectFile, [options])](#ResettableFile+readFileSync) ⇒ <code>\*</code>
+  - [.readFileDetailedSync(projectFile, [options])](#ResettableFile+readFileDetailedSync) ⇒ <code>Object</code>
+  - [.writeFileSync(projectFile, data, [options])](#ResettableFile+writeFileSync) ⇒ <code>void</code>
+  - [.deleteFileSync(projectFile, [options])](#ResettableFile+deleteFileSync) ⇒ <code>void</code>
+  - [.copyFileSync(sourceFile, projectFile, [options])](#ResettableFile+copyFileSync) ⇒ <code>void</code>
+  - [.createDirSync(projectDir, [options])](#ResettableFile+createDirSync) ⇒ <code>void</code>
+  - [.deleteDirSync(projectDir, [options])](#ResettableFile+deleteDirSync) ⇒ <code>void</code>
 
 <a name="new_ResettableFile_new"></a>
 
@@ -452,7 +451,7 @@ by <code>reset()</code> method.</p>
 **Returns**: <code>string</code> - <ul>
 
 <li>Path in root.</li>
-</ul>  
+</ul>
 
 | Param   | Type                | Description                                         |
 | ------- | ------------------- | --------------------------------------------------- |
@@ -475,7 +474,7 @@ resettable.fromRoot("path/to/file.txt"); // dir/path/to/file.txt
 **Returns**: <code>string</code> - <ul>
 
 <li>Path in root.</li>
-</ul>  
+</ul>
 
 | Param   | Type                | Description                                         |
 | ------- | ------------------- | --------------------------------------------------- |
@@ -498,7 +497,7 @@ resettable.fromSourceRoot("path/to/file.txt"); // sourcedir/path/to/file.txt
 **Returns**: <code>boolean</code> - <ul>
 
 <li>Whether given file is a tracked data file.</li>
-</ul>  
+</ul>
 
 | Param       | Type                | Description          |
 | ----------- | ------------------- | -------------------- |
@@ -515,7 +514,7 @@ Returns true for broken links. (Links which points to non-existing paths, which 
 **Returns**: <code>\*</code> - <ul>
 
 <li><code>t</code> or <code>f</code> value based on existence of files in root.</li>
-</ul>  
+</ul>
 
 | Param        | Type                                                     | Default            | Description                                                 |
 | ------------ | -------------------------------------------------------- | ------------------ | ----------------------------------------------------------- |
@@ -533,7 +532,7 @@ Returns true for broken links. (Links which points to non-existing paths, which 
 **Returns**: <code>boolena</code> - <ul>
 
 <li>Whether given project file is a broken link.</li>
-</ul>  
+</ul>
 
 | Param       | Type                | Description                   |
 | ----------- | ------------------- | ----------------------------- |
@@ -548,7 +547,7 @@ Returns true for broken links. (Links which points to non-existing paths, which 
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if files cannot be written</li>
   </ul>
 
@@ -562,7 +561,7 @@ WARNING: Does not recreate deleted files.</p>
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if files cannot be written</li>
   </ul>
 
@@ -575,7 +574,7 @@ WARNING: Does not recreate deleted files.</p>
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be reset.</li>
   </ul>
 
@@ -596,7 +595,7 @@ WARNING: Does not recreate deleted files.</p>
 </ul>  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file details cannot be get.</li>
   </ul>
 
@@ -618,7 +617,7 @@ same hash for same data even they are formatted differently.</p>
 **Returns**: <code>string</code> - <ul>
 
 <li>Calculated hash for file.</li>
-</ul>  
+</ul>
 
 | Param       | Type                | Description                                                          |
 | ----------- | ------------------- | -------------------------------------------------------------------- |
@@ -638,7 +637,7 @@ Changes made are saved to same file when project is saved via <code>save()</code
 </ul>  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be created.</li>
   </ul>
 
@@ -664,7 +663,7 @@ Changes made are saved to same file when project is saved via <code>save()</code
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if symbolic link cannot be created.</li>
   </ul>
 
@@ -696,7 +695,7 @@ createSymLink(here("../../config.json"), "tsconfig.json");
 </ul>  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be found.</li>
   </ul>
 
@@ -727,7 +726,7 @@ createSymLink(here("../../config.json"), "tsconfig.json");
 </ul>  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be found.</li>
   </ul>
 
@@ -754,7 +753,7 @@ createSymLink(here("../../config.json"), "tsconfig.json");
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be created</li>
   </ul>
 
@@ -784,7 +783,7 @@ project.writeFile("./some-config.json", '{"name": "my-project"}'); // Writes giv
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be deleted.</li>
   </ul>
 
@@ -812,7 +811,7 @@ project.copy("./some-config.json", "./some-config.json"); // Copies some-config.
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if file cannot be created</li>
   </ul>
 
@@ -839,7 +838,7 @@ project.copy("./some-config.json", "./some-config.json"); // Copies some-config.
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if directory tree cannot be created.</li>
   </ul>
 
@@ -865,7 +864,7 @@ project.createDir("path/to/dir"); // Created "path", "to" and "dir" as necessary
 **Kind**: instance method of [<code>ResettableFile</code>](#ResettableFile)  
 **Throws**:
 
-* <code>VError</code> <ul>
+- <code>VError</code> <ul>
   <li>Throws error if directory or its content cannot be deleted.</li>
   </ul>
 
